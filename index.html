@@ -15,9 +15,10 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      overflow: hidden;
       flex-direction: column;
       text-align: center;
+      overflow: hidden;
+      position: relative;
     }
 
     .typewriter {
@@ -26,7 +27,7 @@
       border-right: 0.15em solid #fff;
       overflow: hidden;
       width: 0;
-      animation: typing 5s steps(14, end) forwards, blink-caret 0.75s step-end infinite;
+      animation: typing 4s steps(14, end) forwards, blink-caret 0.75s step-end infinite;
     }
 
     @keyframes typing {
@@ -41,7 +42,7 @@
 
     .fade-out {
       animation: fadeOut 2s ease forwards;
-      animation-delay: 6s;
+      animation-delay: 5s;
     }
 
     @keyframes fadeOut {
@@ -55,15 +56,16 @@
       visibility: hidden;
       opacity: 0;
       animation: fadeIn 2s ease forwards;
-      animation-delay: 8s;
+      animation-delay: 7s;
       width: 95%;
       max-width: 1400px;
       margin-top: 20px;
+      position: relative;
     }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); opacity: 1; visibility: visible; }
+      to { opacity: 1; transform: translateY(0); visibility: visible; }
     }
 
     .grid {
@@ -73,12 +75,15 @@
       font-size: 2vw;
       height: 60vh;
       overflow: hidden;
+      position: relative;
+      mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
     }
 
     .column {
-      position: relative;
       height: 100%;
       overflow: hidden;
+      position: relative;
     }
 
     .scroll-content {
@@ -88,13 +93,16 @@
       min-height: 200%;
     }
 
-    .left .scroll-content,
-    .right .scroll-content {
+    .left .scroll-content {
       animation: scrollDown 20s linear infinite;
     }
 
     .center .scroll-content {
       animation: scrollUp 20s linear infinite;
+    }
+
+    .right .scroll-content {
+      animation: scrollDown 20s linear infinite;
     }
 
     @keyframes scrollDown {
@@ -103,8 +111,8 @@
     }
 
     @keyframes scrollUp {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-50%); }
+      0% { transform: translateY(-50%); }
+      100% { transform: translateY(0); }
     }
 
     .scroll-content div {
@@ -190,7 +198,7 @@
 
     function fillColumn(elementId) {
       const container = document.getElementById(elementId);
-      if (container.children.length > 0) return; // захист від дублювання
+      if (container.children.length > 0) return;
 
       const mod = elementId === "left" ? 0 : elementId === "center" ? 1 : 2;
       const fullList = phrases.filter((_, i) => i % 3 === mod);
@@ -216,7 +224,7 @@
       fillColumn("left");
       fillColumn("center");
       fillColumn("right");
-    }, 8000);
+    }, 7000);
   </script>
 </body>
 </html>
