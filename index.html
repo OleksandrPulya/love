@@ -11,23 +11,22 @@
       background-color: #000;
       color: #fff;
       font-family: 'Segoe UI', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #typewriter {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      flex-direction: column;
-      text-align: center;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .typewriter {
       font-size: 10vw;
       white-space: nowrap;
       border-right: 0.15em solid #fff;
       overflow: hidden;
       width: 0;
-      animation: typing 4s steps(14, end) forwards, blink-caret 0.75s step-end infinite;
+      animation: typing 5s steps(14, end) forwards, blink-caret 0.75s step-end infinite;
+      transition: opacity 2s ease;
     }
 
     @keyframes typing {
@@ -42,7 +41,7 @@
 
     .fade-out {
       animation: fadeOut 2s ease forwards;
-      animation-delay: 5s;
+      animation-delay: 6s;
     }
 
     @keyframes fadeOut {
@@ -53,19 +52,27 @@
     }
 
     .translations {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
       visibility: hidden;
       opacity: 0;
       animation: fadeIn 2s ease forwards;
-      animation-delay: 7s;
+      animation-delay: 8s;
       width: 95%;
       max-width: 1400px;
-      margin-top: 20px;
-      position: relative;
+      margin: auto;
+      box-sizing: border-box;
     }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); visibility: visible; }
+      to { opacity: 1; transform: translateY(0); visibility: visible; opacity: 1; }
     }
 
     .grid {
@@ -73,17 +80,14 @@
       grid-template-columns: 1fr 1fr 1fr;
       gap: 40px;
       font-size: 2vw;
-      height: 60vh;
-      overflow: hidden;
-      position: relative;
-      mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+      width: 100%;
+      height: 100%;
     }
 
     .column {
+      position: relative;
       height: 100%;
       overflow: hidden;
-      position: relative;
     }
 
     .scroll-content {
@@ -93,16 +97,13 @@
       min-height: 200%;
     }
 
-    .left .scroll-content {
+    .left .scroll-content,
+    .right .scroll-content {
       animation: scrollDown 20s linear infinite;
     }
 
     .center .scroll-content {
       animation: scrollUp 20s linear infinite;
-    }
-
-    .right .scroll-content {
-      animation: scrollDown 20s linear infinite;
     }
 
     @keyframes scrollDown {
@@ -111,8 +112,8 @@
     }
 
     @keyframes scrollUp {
-      0% { transform: translateY(-50%); }
-      100% { transform: translateY(0); }
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
     }
 
     .scroll-content div {
@@ -138,7 +139,7 @@
   </style>
 </head>
 <body>
-  <div id="typewriter" class="typewriter fade-out">I love you ❤️</div>
+  <div id="typewriter" class="fade-out">I love you ❤️</div>
   <div id="translations" class="translations">
     <div class="grid">
       <div class="column left"><div class="scroll-content" id="left"></div></div>
@@ -198,7 +199,7 @@
 
     function fillColumn(elementId) {
       const container = document.getElementById(elementId);
-      if (container.children.length > 0) return;
+      if (container.children.length > 0) return; // захист від дублювання
 
       const mod = elementId === "left" ? 0 : elementId === "center" ? 1 : 2;
       const fullList = phrases.filter((_, i) => i % 3 === mod);
@@ -215,16 +216,18 @@
       const typewriter = document.getElementById('typewriter');
       const translations = document.getElementById('translations');
 
+      // Ховаємо напис з ефектом плавного зникання
+      typewriter.style.opacity = '0';
       typewriter.style.visibility = 'hidden';
-      typewriter.style.opacity = 0;
 
+      // Показуємо колонки перекладів
       translations.style.visibility = 'visible';
-      translations.style.opacity = 1;
+      translations.style.opacity = '1';
 
       fillColumn("left");
       fillColumn("center");
       fillColumn("right");
-    }, 7000);
+    }, 8000);
   </script>
 </body>
 </html>
