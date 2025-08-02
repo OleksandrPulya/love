@@ -52,8 +52,10 @@
     }
 
     .translations {
-      display: none;
+      visibility: hidden;
+      opacity: 0;
       animation: fadeIn 2s ease forwards;
+      animation-delay: 8s;
       width: 95%;
       max-width: 1400px;
       margin-top: 20px;
@@ -61,7 +63,7 @@
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      to { opacity: 1; transform: translateY(0); opacity: 1; visibility: visible; }
     }
 
     .grid {
@@ -83,6 +85,7 @@
       display: flex;
       flex-direction: column;
       gap: 15px;
+      min-height: 200%;
     }
 
     .left .scroll-content,
@@ -101,7 +104,7 @@
 
     @keyframes scrollUp {
       0% { transform: translateY(0); }
-      100% { transform: translateY(50%); }
+      100% { transform: translateY(-50%); }
     }
 
     .scroll-content div {
@@ -135,6 +138,7 @@
       <div class="column right"><div class="scroll-content" id="right"></div></div>
     </div>
   </div>
+
   <script>
     const phrases = [
       ["🇺🇸", "I love you"],
@@ -186,6 +190,8 @@
 
     function fillColumn(elementId) {
       const container = document.getElementById(elementId);
+      if (container.children.length > 0) return; // захист від дублювання
+
       const mod = elementId === "left" ? 0 : elementId === "center" ? 1 : 2;
       const fullList = phrases.filter((_, i) => i % 3 === mod);
       const doubledList = fullList.concat(fullList);
@@ -198,8 +204,14 @@
     }
 
     setTimeout(() => {
-      document.getElementById('typewriter').style.display = 'none';
-      document.getElementById('translations').style.display = 'block';
+      const typewriter = document.getElementById('typewriter');
+      const translations = document.getElementById('translations');
+
+      typewriter.style.visibility = 'hidden';
+      typewriter.style.opacity = 0;
+
+      translations.style.visibility = 'visible';
+      translations.style.opacity = 1;
 
       fillColumn("left");
       fillColumn("center");
