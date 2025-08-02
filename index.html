@@ -17,19 +17,34 @@
       font-family: 'Segoe UI', sans-serif;
       height: 100vh;
       overflow: hidden;
+      position: relative;
     }
 
-    #typewriter {
+    #typewriter, #multilang {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 10vw;
       white-space: nowrap;
       overflow: hidden;
+      opacity: 1;
+      transition: opacity 2s ease;
+      user-select: none;
+    }
+
+    #typewriter {
+      font-size: 10vw;
       border-right: 0.15em solid #fff;
       width: 0ch;
       animation: typing 4s steps(12, end) forwards, blink-caret 0.75s step-end infinite;
+      z-index: 10;
+    }
+
+    #multilang {
+      font-size: 12vw;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 20;
     }
 
     @keyframes typing {
@@ -43,18 +58,13 @@
     }
 
     .fade-out {
-      animation: fadeOut 2s ease forwards;
+      opacity: 0 !important;
+      transition: opacity 2s ease;
     }
 
-    @keyframes fadeOut {
-      0% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.95);
-      }
+    .fade-in {
+      opacity: 1 !important;
+      transition: opacity 2s ease;
     }
 
     .translations {
@@ -70,6 +80,13 @@
       opacity: 0;
       visibility: hidden;
       height: 100vh;
+      transition: opacity 2s ease;
+      z-index: 5;
+    }
+
+    .translations.visible {
+      opacity: 1;
+      visibility: visible;
     }
 
     .column {
@@ -146,6 +163,7 @@
 </head>
 <body>
   <div id="typewriter">I love you ❤️</div>
+  <div id="multilang">різними мовами</div>
 
   <div id="translations" class="translations">
     <div class="column left"><div class="scroll-content" id="left"></div></div>
@@ -226,21 +244,39 @@
       }
     }
 
-    setTimeout(() => {
+    async function runSequence() {
       const typewriter = document.getElementById("typewriter");
-      typewriter.classList.add("fade-out");
+      const multilang = document.getElementById("multilang");
+      const translations = document.getElementById("translations");
 
-      setTimeout(() => {
-        typewriter.style.display = "none";
-        const translations = document.getElementById("translations");
-        translations.style.visibility = "visible";
-        translations.style.opacity = "1";
+      // Чекаємо поки надрукується (4с) + 1с додатково
+      await new Promise(r => setTimeout(r, 5000));
 
-        fillColumn("left", columns.left);
-        fillColumn("center", columns.center);
-        fillColumn("right", columns.right);
-      }, 2000);
-    }, 5000);
+      // Повільно зникає typewriter (2с)
+      typewriter.style.opacity = '0';
+      await new Promise(r => setTimeout(r, 2000));
+      typewriter.style.display = 'none';
+
+      // Показуємо великий текст "різними мовами"
+      multilang.style.opacity = '1';
+
+      // Тримаємо 3 секунди
+      await new Promise(r => setTimeout(r, 3000));
+
+      // Повільно зникаємо "різними мовами"
+      multilang.style.opacity = '0';
+      await new Promise(r => setTimeout(r, 2000));
+      multilang.style.display = 'none';
+
+      // Показуємо колонки перекладів
+      fillColumn("left", columns.left);
+      fillColumn("center", columns.center);
+      fillColumn("right", columns.right);
+
+      translations.classList.add("visible");
+    }
+
+    runSequence();
   </script>
 </body>
 </html>
