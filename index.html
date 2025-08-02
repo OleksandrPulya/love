@@ -15,79 +15,67 @@
       background-color: #000;
       color: #fff;
       font-family: 'Segoe UI', sans-serif;
-      height: 100vh;
       overflow: hidden;
     }
 
-    #typewriter {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 10vw;
+    .typewriter {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-size: 3rem;
       white-space: nowrap;
       overflow: hidden;
-      border-right: 0.15em solid #fff;
-      width: 0ch;
-      animation: typing 4s steps(12, end) forwards, blink-caret 0.75s step-end infinite;
+      border-right: 2px solid white;
+      width: 0;
+      animation: typing 5s steps(20, end) forwards, blink 0.5s step-end infinite;
     }
 
     @keyframes typing {
-      from { width: 0ch; }
-      to { width: 12ch; }
+      to { width: 20ch; }
     }
 
-    @keyframes blink-caret {
-      from, to { border-color: transparent; }
-      50% { border-color: white; }
+    @keyframes blink {
+      50% { border-color: transparent; }
     }
 
     .fade-out {
-      animation: fadeOut 2s ease forwards;
+      animation: fadeOut 2s forwards;
     }
 
     @keyframes fadeOut {
-      0% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.95);
-      }
+      to { opacity: 0; visibility: hidden; }
     }
 
     .translations {
       position: absolute;
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 960px;
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      opacity: 0;
-      visibility: hidden;
+      left: 0;
+      width: 100vw;
       height: 100vh;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 2s;
     }
 
     .column {
       width: 33%;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
       overflow: hidden;
     }
 
     .scroll-content {
       display: flex;
       flex-direction: column;
-      animation: scroll 20s linear infinite;
+      animation: scrollUp 60s linear infinite;
     }
 
-    .column.center .scroll-content {
-      animation-direction: reverse;
-    }
-
-    @keyframes scroll {
+    @keyframes scrollUp {
       0% { transform: translateY(0); }
       100% { transform: translateY(-50%); }
     }
@@ -96,25 +84,22 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 8px;
-      font-size: 2vw;
-      line-height: 1.3;
+      font-size: 1.5rem;
+      padding: 0.3em 0;
     }
 
     .scroll-content img {
       width: 24px;
-      height: 16px;
+      height: auto;
     }
 
-    /* --- Мобільна адаптація --- */
+    /* Мобільна адаптація */
     @media (max-width: 1024px) {
       .translations {
         flex-direction: column;
-        width: 100%;
-        max-width: none;
-        gap: 0;
-        height: 100vh;
-        overflow: hidden;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
       }
 
       .column.left,
@@ -127,30 +112,28 @@
         height: 100vh;
         display: flex;
         justify-content: center;
-        align-items: start;
-        text-align: center;
         overflow: hidden;
-        position: relative;
+        text-align: center;
       }
 
       .scroll-content {
-        animation: scrollInfinite 40s linear infinite;
+        animation: scrollMobile 60s linear infinite;
       }
 
-      @keyframes scrollInfinite {
+      @keyframes scrollMobile {
         0% { transform: translateY(0); }
-        100% { transform: translateY(-100%); }
+        100% { transform: translateY(-50%); }
       }
 
       .scroll-content div {
-        font-size: 5vw;
+        font-size: 6vw;
         justify-content: center;
       }
     }
   </style>
 </head>
 <body>
-  <div id="typewriter">I love you ❤️</div>
+  <div id="typewriter" class="typewriter">Я тебе люблю</div>
 
   <div id="translations" class="translations">
     <div class="column left"><div class="scroll-content" id="left"></div></div>
@@ -160,67 +143,38 @@
 
   <script>
     const phrases = [
-      ["https://flagcdn.com/us.svg", "I love you"],
-      ["https://flagcdn.com/fr.svg", "Je t’aime"],
-      ["https://flagcdn.com/es.svg", "Te amo"],
-      ["https://flagcdn.com/de.svg", "Ich liebe dich"],
-      ["https://flagcdn.com/it.svg", "Ti amo"],
-      ["https://flagcdn.com/pt.svg", "Eu te amo"],
-      ["https://flagcdn.com/ua.svg", "Я тебе люблю"],
-      ["https://flagcdn.com/cn.svg", "我爱你"],
-      ["https://flagcdn.com/jp.svg", "愛してる"],
-      ["https://flagcdn.com/kr.svg", "사랑해"],
-      ["https://flagcdn.com/sa.svg", "أحبك"],
-      ["https://flagcdn.com/in.svg", "मैं तुमसे प्यार करता हूँ"],
-      ["https://flagcdn.com/tr.svg", "Seni seviyorum"],
-      ["https://flagcdn.com/ir.svg", "دوستت دارم"],
-      ["https://flagcdn.com/gr.svg", "Σ' αγαπώ"],
-      ["https://flagcdn.com/pl.svg", "Kocham cię"],
-      ["https://flagcdn.com/cz.svg", "Miluji tě"],
-      ["https://flagcdn.com/ro.svg", "Te iubesc"],
-      ["https://flagcdn.com/hu.svg", "Szeretlek"],
-      ["https://flagcdn.com/nl.svg", "Ik hou van jou"],
-      ["https://flagcdn.com/se.svg", "Jag älskar dig"],
-      ["https://flagcdn.com/no.svg", "Jeg elsker deg"],
-      ["https://flagcdn.com/fi.svg", "Rakastan sinua"],
-      ["https://flagcdn.com/id.svg", "Aku cinta kamu"],
-      ["https://flagcdn.com/vn.svg", "Tôi yêu bạn"],
-      ["https://flagcdn.com/th.svg", "ฉันรักคุณ"],
-      ["https://flagcdn.com/il.svg", "אני אוהב אותך"],
-      ["https://flagcdn.com/ke.svg", "Nakupenda"],
-      ["https://flagcdn.com/ng.svg", "Mo ni fẹ́ rẹ"],
-      ["https://flagcdn.com/za.svg", "Ngiyakuthanda"],
-      ["https://flagcdn.com/zw.svg", "Ndinokuda"],
-      ["https://flagcdn.com/my.svg", "Saya cinta padamu"],
-      ["https://flagcdn.com/lu.svg", "Ech hunn dech gaer"],
-      ["https://flagcdn.com/aq.svg", "Mi amas vin"],
-      ["https://flagcdn.com/al.svg", "Te dua"],
-      ["https://flagcdn.com/ba.svg", "Volim te"],
-      ["https://flagcdn.com/sk.svg", "Milujem ťa"],
-      ["https://flagcdn.com/si.svg", "Ljubim te"],
-      ["https://flagcdn.com/lt.svg", "Aš tave myliu"],
-      ["https://flagcdn.com/lv.svg", "Es tevi mīlu"],
-      ["https://flagcdn.com/ph.svg", "Mahal kita"],
-      ["https://flagcdn.com/is.svg", "Ég elska þig"],
-      ["https://flagcdn.com/ca.svg", "I love you"],
-      ["https://flagcdn.com/mx.svg", "Te quiero"],
-      ["https://flagcdn.com/br.svg", "Eu te amo"]
+      ["https://flagcdn.com/w40/fr.png", "Je t'aime"],
+      ["https://flagcdn.com/w40/es.png", "Te amo"],
+      ["https://flagcdn.com/w40/de.png", "Ich liebe dich"],
+      ["https://flagcdn.com/w40/it.png", "Ti amo"],
+      ["https://flagcdn.com/w40/gb.png", "I love you"],
+      ["https://flagcdn.com/w40/jp.png", "愛してる"],
+      ["https://flagcdn.com/w40/kr.png", "사랑해"],
+      ["https://flagcdn.com/w40/ua.png", "Я тебе люблю"],
+      ["https://flagcdn.com/w40/ru.png", "Я тебя люблю"],
+      ["https://flagcdn.com/w40/pl.png", "Kocham cię"],
+      ["https://flagcdn.com/w40/pt.png", "Eu te amo"],
+      ["https://flagcdn.com/w40/cn.png", "我爱你"],
+      ["https://flagcdn.com/w40/il.png", "אני אוהב אותך"],
+      ["https://flagcdn.com/w40/gr.png", "Σ 'αγαπώ"],
+      ["https://flagcdn.com/w40/vn.png", "Anh yêu em"],
     ];
 
-    const columnCount = 3;
-    const perColumn = Math.ceil(phrases.length / columnCount);
     const columns = {
-      left: phrases.slice(0, perColumn),
-      center: phrases.slice(perColumn, perColumn * 2),
-      right: phrases.slice(perColumn * 2)
+      left: phrases.filter((_, i) => i % 3 === 0),
+      center: phrases.filter((_, i) => i % 3 === 1),
+      right: phrases.filter((_, i) => i % 3 === 2),
     };
+
+    function isMobile() {
+      return window.innerWidth <= 1024;
+    }
 
     function fillColumn(id, items) {
       const container = document.getElementById(id);
       if (!container) return;
 
-      // дублюємо для безшовного скролу
-      const fullList = [...items, ...items];
+      const fullList = [...items, ...items]; // дублюємо для безшовної прокрутки
       for (const [flagUrl, text] of fullList) {
         const div = document.createElement("div");
         const img = document.createElement("img");
@@ -232,21 +186,29 @@
       }
     }
 
-    setTimeout(() => {
-      const typewriter = document.getElementById("typewriter");
-      typewriter.classList.add("fade-out");
+    function showTranslations() {
+      document.getElementById("typewriter").style.display = "none";
+      const translations = document.getElementById("translations");
+      translations.style.visibility = "visible";
+      translations.style.opacity = "1";
 
-      setTimeout(() => {
-        typewriter.style.display = "none";
-        const translations = document.getElementById("translations");
-        translations.style.visibility = "visible";
-        translations.style.opacity = "1";
-
+      if (isMobile()) {
+        fillColumn("center", phrases);
+      } else {
         fillColumn("left", columns.left);
         fillColumn("center", columns.center);
         fillColumn("right", columns.right);
-      }, 2000);
-    }, 5000);
+      }
+    }
+
+    if (isMobile()) {
+      showTranslations(); // на мобільному одразу
+    } else {
+      setTimeout(() => {
+        document.getElementById("typewriter").classList.add("fade-out");
+        setTimeout(showTranslations, 2000);
+      }, 5000);
+    }
   </script>
 </body>
 </html>
