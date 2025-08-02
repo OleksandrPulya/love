@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>I love you</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -16,10 +20,10 @@
     }
 
     #typewriter {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       font-size: 10vw;
       white-space: nowrap;
       border-right: 0.15em solid #fff;
@@ -38,16 +42,13 @@
       50% { border-color: white }
     }
 
-    #typewriter.fade-out {
+    .fade-out {
       animation: fadeOut 2s ease forwards;
-      animation-delay: 6s;
     }
 
     @keyframes fadeOut {
-      to {
-        opacity: 0;
-        transform: scale(0.95);
-      }
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(0.95); }
     }
 
     .translations {
@@ -59,14 +60,11 @@
       display: flex;
       align-items: stretch;
       justify-content: center;
-      visibility: hidden;
       opacity: 0;
+      visibility: hidden;
       animation: fadeIn 2s ease forwards;
       animation-delay: 8s;
-      width: 920px;
-      max-width: none;
-      margin: 0;
-      box-sizing: border-box;
+      width: 960px;
       gap: 40px;
     }
 
@@ -85,10 +83,9 @@
     }
 
     .column {
-      position: relative;
+      width: 300px;
       height: 100%;
       overflow: hidden;
-      width: 300px;
       display: flex;
       flex-direction: column;
     }
@@ -133,11 +130,6 @@
       .column {
         width: 45%;
       }
-      .translations {
-        width: auto;
-        left: 50%;
-        transform: translateX(-50%);
-      }
     }
 
     @media (max-width: 480px) {
@@ -148,11 +140,6 @@
       }
       .column {
         width: 100%;
-      }
-      .translations {
-        width: auto;
-        left: 50%;
-        transform: translateX(-50%);
       }
     }
   </style>
@@ -235,20 +222,20 @@
       const typewriter = document.getElementById('typewriter');
       const translations = document.getElementById('translations');
 
-      // Додаємо анімацію зникнення
+      // Додаємо клас для плавного зникнення
       typewriter.classList.add('fade-out');
 
-      // Показати переклади трохи пізніше
+      // Через 2 секунди показуємо переклади
       setTimeout(() => {
-        typewriter.style.visibility = 'hidden';
+        typewriter.style.display = 'none';
         translations.style.visibility = 'visible';
         translations.style.opacity = '1';
 
         fillColumn("left");
         fillColumn("center");
         fillColumn("right");
-      }, 2000); // чекати завершення fade-out
-    }, 6000); // початок fade-out після typing
+      }, 2000);
+    }, 6000);
   </script>
 </body>
 </html>
