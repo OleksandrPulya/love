@@ -17,6 +17,7 @@
       height: 100vh;
       overflow: hidden;
       flex-direction: column;
+      text-align: center;
     }
 
     .typewriter {
@@ -51,9 +52,7 @@
 
     .translations {
       display: none;
-      flex-direction: column;
-      align-items: center;
-      font-size: 3vw;
+      font-size: 4vw;
       animation: fadeIn 2s ease forwards;
     }
 
@@ -65,18 +64,75 @@
 </head>
 <body>
   <div id="typewriter" class="typewriter fade-out">I love you</div>
-
-  <div id="translations" class="translations">
-    <div>Я тебе люблю ❤️ (українська)</div>
-    <div>Je t’aime ❤️ (французька)</div>
-    <div>Te amo ❤️ (іспанська)</div>
-  </div>
+  <div id="translations" class="translations"></div>
 
   <script>
+    const phrases = [
+      "I love you ❤️ (English)",
+      "Я тебе люблю ❤️ (Ukrainian)",
+      "Je t’aime ❤️ (French)",
+      "Te amo ❤️ (Spanish)",
+      "Ich liebe dich ❤️ (German)",
+      "Ti amo ❤️ (Italian)",
+      "Eu te amo ❤️ (Portuguese)",
+      "Я тебя люблю ❤️ (Russian)",
+      "我爱你 ❤️ (Chinese)",
+      "愛してる ❤️ (Japanese)",
+      "사랑해 ❤️ (Korean)",
+      "أحبك ❤️ (Arabic)",
+      "मैं तुमसे प्यार करता हूँ ❤️ (Hindi)",
+      "Seni seviyorum ❤️ (Turkish)",
+      "دوستت دارم ❤️ (Persian)",
+      "Σ' αγαπώ ❤️ (Greek)",
+      "Kocham cię ❤️ (Polish)",
+      "Miluji tě ❤️ (Czech)",
+      "Te iubesc ❤️ (Romanian)",
+      "Szeretlek ❤️ (Hungarian)",
+      "Ik hou van jou ❤️ (Dutch)",
+      "Jag älskar dig ❤️ (Swedish)",
+      "Jeg elsker deg ❤️ (Norwegian)",
+      "Rakastan sinua ❤️ (Finnish)",
+      "Aku cinta kamu ❤️ (Indonesian)",
+      "Anh yêu em ❤️ (Vietnamese)",
+      "ฉันรักคุณ ❤️ (Thai)",
+      "אני אוהב אותך ❤️ (Hebrew)",
+      "Nakupenda ❤️ (Swahili)",
+      "Mo ni fẹ́ rẹ ❤️ (Yoruba)",
+      "Ke a go rata ❤️ (Tswana)",
+      "Ek het jou lief ❤️ (Afrikaans)",
+      "Volim te ❤️ (Serbian)",
+      "Ljublim te ❤️ (Slovenian)",
+      "Milujem ťa ❤️ (Slovak)",
+      "T'estimo ❤️ (Catalan)",
+      "Jag älskar dig ❤️ (Icelandic)",
+      "Aš tave myliu ❤️ (Lithuanian)",
+      "Es tevi mīlu ❤️ (Latvian)",
+      "Mahal kita ❤️ (Tagalog)",
+      "Ngiyakuthanda ❤️ (Zulu)",
+      "Ndinokuda ❤️ (Shona)",
+      "Tôi yêu bạn ❤️ (Vietnamese)",
+      "Saya cinta padamu ❤️ (Malay)",
+      "Ich liebe dich ❤️ (Luxembourgish)",
+      "Te quiero ❤️ (Galician)",
+      "Mi amas vin ❤️ (Esperanto)",
+      "Volim te ❤️ (Bosnian)",
+      "Te dua ❤️ (Albanian)",
+      "Minä rakastan sinua ❤️ (Karelian)"
+    ];
+
+    let index = 0;
+
     setTimeout(() => {
       document.getElementById('typewriter').style.display = 'none';
-      document.getElementById('translations').style.display = 'flex';
-    }, 6000); // після завершення анімації
+      const translations = document.getElementById('translations');
+      translations.style.display = 'block';
+      translations.textContent = phrases[index];
+
+      setInterval(() => {
+        index = (index + 1) % phrases.length;
+        translations.textContent = phrases[index];
+      }, 2000);
+    }, 6000); // після завершення друкування
   </script>
 </body>
 </html>
