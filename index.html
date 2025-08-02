@@ -26,7 +26,6 @@
       overflow: hidden;
       width: 0;
       animation: typing 5s steps(14, end) forwards, blink-caret 0.75s step-end infinite;
-      transition: opacity 2s ease;
     }
 
     @keyframes typing {
@@ -39,7 +38,7 @@
       50% { border-color: white }
     }
 
-    .fade-out {
+    #typewriter.fade-out {
       animation: fadeOut 2s ease forwards;
       animation-delay: 6s;
     }
@@ -64,7 +63,7 @@
       opacity: 0;
       animation: fadeIn 2s ease forwards;
       animation-delay: 8s;
-      width: 920px; /* ширина 3 колонок + 2 проміжки */
+      width: 920px;
       max-width: none;
       margin: 0;
       box-sizing: border-box;
@@ -73,7 +72,7 @@
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); visibility: visible; opacity: 1; }
+      to { opacity: 1; transform: translateY(0); visibility: visible; }
     }
 
     .grid {
@@ -159,7 +158,7 @@
   </style>
 </head>
 <body>
-  <div id="typewriter" class="fade-out">I love you ❤️</div>
+  <div id="typewriter">I love you ❤️</div>
   <div id="translations" class="translations">
     <div class="grid">
       <div class="column left"><div class="scroll-content" id="left"></div></div>
@@ -219,7 +218,7 @@
 
     function fillColumn(elementId) {
       const container = document.getElementById(elementId);
-      if (container.children.length > 0) return; // захист від дублювання
+      if (container.children.length > 0) return;
 
       const mod = elementId === "left" ? 0 : elementId === "center" ? 1 : 2;
       const fullList = phrases.filter((_, i) => i % 3 === mod);
@@ -227,7 +226,7 @@
 
       doubledList.forEach(([flag, text]) => {
         const div = document.createElement('div');
-        div.textContent = ${flag} ${text};
+        div.textContent = `${flag} ${text}`;
         container.appendChild(div);
       });
     }
@@ -236,18 +235,20 @@
       const typewriter = document.getElementById('typewriter');
       const translations = document.getElementById('translations');
 
-      // Плавно ховаємо напис
-      typewriter.style.opacity = '0';
-      typewriter.style.visibility = 'hidden';
+      // Додаємо анімацію зникнення
+      typewriter.classList.add('fade-out');
 
-      // Показуємо колонки перекладів
-      translations.style.visibility = 'visible';
-      translations.style.opacity = '1';
+      // Показати переклади трохи пізніше
+      setTimeout(() => {
+        typewriter.style.visibility = 'hidden';
+        translations.style.visibility = 'visible';
+        translations.style.opacity = '1';
 
-      fillColumn("left");
-      fillColumn("center");
-      fillColumn("right");
-    }, 8000);
+        fillColumn("left");
+        fillColumn("center");
+        fillColumn("right");
+      }, 2000); // чекати завершення fade-out
+    }, 6000); // початок fade-out після typing
   </script>
 </body>
 </html>
