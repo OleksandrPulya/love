@@ -113,15 +113,36 @@
       }
     }
 
-    @media (max-width: 480px) {
+    /* MOBILE/TABLET ADAPTATION */
+    @media (max-width: 1024px) {
       .translations {
         flex-direction: column;
-        gap: 20px;
-        align-items: center;
+        width: 100%;
+        max-width: none;
+        gap: 0;
+        height: 100vh;
+        overflow: hidden;
       }
       .column {
         width: 100%;
+        height: 100vh;
+        overflow: hidden;
       }
+      .scroll-content {
+        animation: scrollUp 20s linear infinite;
+      }
+      /* Вимикаємо зворотню анімацію для центрального стовпчика */
+      .column.center .scroll-content {
+        animation-direction: normal;
+      }
+    }
+
+    @keyframes scrollUp {
+      0% { transform: translateY(50%); }
+      100% { transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
       .scroll-content div {
         font-size: 4vw;
       }
