@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>I love you ❤️</title>
   <link rel="icon" href="logo.png.png" type="image/png" />
-
   <style>
     * {
       box-sizing: border-box;
     }
-
     body {
       margin: 0;
       padding: 0;
@@ -21,7 +19,6 @@
       overflow: hidden;
       position: relative;
     }
-
     #typewriter, #multilang {
       position: absolute;
       top: 50%;
@@ -33,7 +30,6 @@
       transition: opacity 2s ease;
       user-select: none;
     }
-
     #typewriter {
       font-size: 10vw;
       border-right: 0.15em solid #fff;
@@ -41,24 +37,20 @@
       animation: typing 4s steps(12, end) forwards, blink-caret 0.75s step-end infinite;
       z-index: 10;
     }
-
     #multilang {
       font-size: 12vw;
       opacity: 0;
       pointer-events: none;
       z-index: 20;
     }
-
     @keyframes typing {
       from { width: 0ch; }
       to { width: 12ch; }
     }
-
     @keyframes blink-caret {
       from, to { border-color: transparent; }
       50% { border-color: white; }
     }
-
     .translations {
       position: absolute;
       top: 0;
@@ -75,32 +67,26 @@
       transition: opacity 2s ease;
       z-index: 5;
     }
-
     .translations.visible {
       opacity: 1;
       visibility: visible;
     }
-
     .column {
       width: 33%;
       overflow: hidden;
     }
-
     .scroll-content {
       display: flex;
       flex-direction: column;
       animation: scroll 20s linear infinite;
     }
-
     .column.center .scroll-content {
       animation-direction: reverse;
     }
-
     @keyframes scroll {
       0% { transform: translateY(0); }
       100% { transform: translateY(-50%); }
     }
-
     .scroll-content div {
       display: flex;
       align-items: center;
@@ -109,12 +95,10 @@
       font-size: 2vw;
       line-height: 1.3;
     }
-
     .scroll-content img {
       width: 24px;
       height: 16px;
     }
-
     @media (max-width: 768px) {
       .translations {
         flex-direction: column;
@@ -122,12 +106,10 @@
         gap: 0;
         height: 100vh;
       }
-
       .column.left,
       .column.right {
         display: none;
       }
-
       .column.center {
         width: 100%;
         display: flex;
@@ -135,16 +117,13 @@
         align-items: flex-start;
         text-align: center;
       }
-
       .column.center .scroll-content {
         animation: scrollMobile 15s linear infinite;
       }
-
       @keyframes scrollMobile {
         0% { transform: translateY(0); }
         100% { transform: translateY(-50%); }
       }
-
       .scroll-content div {
         font-size: 5vw;
         justify-content: center;
@@ -166,13 +145,12 @@
     const phrases = [
       ["https://flagcdn.com/us.svg", "I love you"],
       ["https://flagcdn.com/ua.svg", "Я тебе кохаю"],
-      ["https://flagcdn.com/gb.svg", "I love you"],
       ["https://flagcdn.com/fr.svg", "Je t’aime"],
-      ["https://flagcdn.com/es.svg", "Te amo"],
       ["https://flagcdn.com/de.svg", "Ich liebe dich"],
+      ["https://flagcdn.com/es.svg", "Te amo"],
       ["https://flagcdn.com/it.svg", "Ti amo"],
-      ["https://flagcdn.com/pt.svg", "Eu te amo"],
       ["https://flagcdn.com/pl.svg", "Kocham cię"],
+      ["https://flagcdn.com/pt.svg", "Eu te amo"],
       ["https://flagcdn.com/cz.svg", "Miluji tě"],
       ["https://flagcdn.com/ro.svg", "Te iubesc"],
       ["https://flagcdn.com/hu.svg", "Szeretlek"],
@@ -210,7 +188,31 @@
       ["https://flagcdn.com/zw.svg", "Ndinokuda"],
       ["https://flagcdn.com/mx.svg", "Te quiero"],
       ["https://flagcdn.com/br.svg", "Eu te amo"],
-      ["https://flagcdn.com/ca.svg", "Je t’aime"]
+      ["https://flagcdn.com/ca.svg", "Je t’aime"],
+      ["https://flagcdn.com/et.svg", "Ewedishalehu"],
+      ["https://flagcdn.com/af.svg", "Ek het jou lief"],
+      ["https://flagcdn.com/ar.svg", "Te amo"],
+      ["https://flagcdn.com/bo.svg", "T'estimo"],
+      ["https://flagcdn.com/cl.svg", "Te amo"],
+      ["https://flagcdn.com/co.svg", "Te amo"],
+      ["https://flagcdn.com/ve.svg", "Te amo"],
+      ["https://flagcdn.com/pe.svg", "Te quiero"],
+      ["https://flagcdn.com/uy.svg", "Te quiero"],
+      ["https://flagcdn.com/py.svg", "Rohayhu"],
+      ["https://flagcdn.com/ec.svg", "Te amo"],
+      ["https://flagcdn.com/kz.svg", "Мен сені сүйемін"],
+      ["https://flagcdn.com/uz.svg", "Men seni sevaman"],
+      ["https://flagcdn.com/kg.svg", "Мен сени жакшы көрөм"],
+      ["https://flagcdn.com/tj.svg", "Ман туро дӯст медорам"],
+      ["https://flagcdn.com/tm.svg", "Men seni söýýärin"],
+      ["https://flagcdn.com/mn.svg", "Би чамд хайртай"],
+      ["https://flagcdn.com/np.svg", "म तिमीलाई माया गर्छु"],
+      ["https://flagcdn.com/bd.svg", "আমি তোমাকে ভালবাসি"],
+      ["https://flagcdn.com/pk.svg", "میں تم سے پیار کرتا ہوں"],
+      ["https://flagcdn.com/lk.svg", "මම ඔබට ආදරෙයි"],
+      ["https://flagcdn.com/mm.svg", "မင်္ဂလာပါ ချစ်တယ်"],
+      ["https://flagcdn.com/kh.svg", "ខ្ញុំស្រលាញ់អ្នក"],
+      ["https://flagcdn.com/la.svg", "ຂ້ອຍຮັກເຈົ້າ"],
     ];
 
     const columnCount = 3;
@@ -224,7 +226,6 @@
     function fillColumn(id, items) {
       const container = document.getElementById(id);
       if (!container) return;
-
       container.innerHTML = "";
       const fullList = [...items, ...items];
       for (const [flagUrl, text] of fullList) {
@@ -266,7 +267,6 @@
         leftCol.style.display = 'block';
         rightCol.style.display = 'block';
         centerCol.style.width = '33%';
-
         fillColumn("left", columns.left);
         fillColumn("center", columns.center);
         fillColumn("right", columns.right);
