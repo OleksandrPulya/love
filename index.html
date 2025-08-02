@@ -234,6 +234,8 @@
       const container = document.getElementById(id);
       if (!container) return;
 
+      container.innerHTML = ""; // очищаємо перед заповненням
+
       const fullList = [...items, ...items]; // для безшовного скролу
       for (const [flagUrl, text] of fullList) {
         const div = document.createElement("div");
@@ -250,6 +252,9 @@
       const typewriter = document.getElementById("typewriter");
       const multilang = document.getElementById("multilang");
       const translations = document.getElementById("translations");
+      const leftCol = document.querySelector(".column.left");
+      const centerCol = document.querySelector(".column.center");
+      const rightCol = document.querySelector(".column.right");
 
       // Чекаємо поки надрукується (4с) + 1с додатково
       await new Promise(r => setTimeout(r, 5000));
@@ -270,10 +275,24 @@
       await new Promise(r => setTimeout(r, 2000));
       multilang.style.display = 'none';
 
-      // Показуємо колонки перекладів
-      fillColumn("left", columns.left);
-      fillColumn("center", columns.center);
-      fillColumn("right", columns.right);
+      // Перевірка ширини екрану
+      if (window.innerWidth <= 768) {
+        // Для мобільних — показуємо лише центр із усіма мовами
+        leftCol.style.display = 'none';
+        rightCol.style.display = 'none';
+        centerCol.style.width = '100%';
+
+        fillColumn("center", phrases);
+      } else {
+        // Для десктопу — показуємо три колонки з поділом мов
+        leftCol.style.display = 'block';
+        rightCol.style.display = 'block';
+        centerCol.style.width = '33%';
+
+        fillColumn("left", columns.left);
+        fillColumn("center", columns.center);
+        fillColumn("right", columns.right);
+      }
 
       translations.classList.add("visible");
     }
