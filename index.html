@@ -25,7 +25,8 @@
       white-space: nowrap;
       border-right: 0.15em solid #fff;
       overflow: hidden;
-      animation: typing 3s steps(10, end), blink-caret 0.75s step-end infinite;
+      width: 0;
+      animation: typing 3s steps(20, end) forwards, blink-caret 0.75s step-end infinite;
     }
 
     @keyframes typing {
@@ -52,19 +53,49 @@
 
     .translations {
       display: none;
-      font-size: 4vw;
       animation: fadeIn 2s ease forwards;
+      width: 90%;
+      max-width: 1200px;
+      margin-top: 20px;
     }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      font-size: 2vw;
+      text-align: left;
+    }
+
+    .grid div {
+      padding: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        font-size: 3vw;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .grid {
+        grid-template-columns: 1fr;
+        font-size: 4vw;
+      }
+    }
   </style>
 </head>
 <body>
   <div id="typewriter" class="typewriter fade-out">I love you ❤️</div>
-  <div id="translations" class="translations"></div>
+  <div id="translations" class="translations">
+    <div class="grid" id="grid"></div>
+  </div>
 
   <script>
     const phrases = [
@@ -120,19 +151,18 @@
       "Minä rakastan sinua ❤️ (Karelian)"
     ];
 
-    let index = 0;
-
     setTimeout(() => {
       document.getElementById('typewriter').style.display = 'none';
       const translations = document.getElementById('translations');
+      const grid = document.getElementById('grid');
       translations.style.display = 'block';
-      translations.textContent = phrases[index];
 
-      setInterval(() => {
-        index = (index + 1) % phrases.length;
-        translations.textContent = phrases[index];
-      }, 2000);
-    }, 6000); // після завершення друкування
+      phrases.forEach(phrase => {
+        const div = document.createElement('div');
+        div.textContent = phrase;
+        grid.appendChild(div);
+      });
+    }, 6000);
   </script>
 </body>
 </html>
