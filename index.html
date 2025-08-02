@@ -63,24 +63,25 @@
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
-      max-width: 960px;
+      max-width: 1200px;
       display: flex;
       justify-content: center;
-      gap: 40px;
+      gap: 60px;
       opacity: 0;
       visibility: hidden;
       height: 100vh;
+      overflow: hidden;
     }
 
     .column {
-      width: 33%;
+      flex: 1;
       overflow: hidden;
     }
 
     .scroll-content {
       display: flex;
       flex-direction: column;
-      animation: scroll 20s linear infinite;
+      animation: scroll 40s linear infinite;
     }
 
     .column.center .scroll-content {
@@ -89,7 +90,7 @@
 
     @keyframes scroll {
       0% { transform: translateY(0); }
-      100% { transform: translateY(-50%); }
+      100% { transform: translateY(-200%); }
     }
 
     .scroll-content div {
@@ -106,15 +107,12 @@
       height: 16px;
     }
 
-    /* --- Мобільна адаптація --- */
     @media (max-width: 1024px) {
       .translations {
         flex-direction: column;
-        width: 100%;
-        max-width: none;
+        align-items: center;
+        justify-content: center;
         gap: 0;
-        height: 100vh;
-        overflow: hidden;
       }
 
       .column.left,
@@ -128,23 +126,27 @@
         display: flex;
         justify-content: center;
         align-items: start;
-        text-align: center;
         overflow: hidden;
-        position: relative;
       }
 
       .scroll-content {
-        animation: scrollInfinite 40s linear infinite;
+        animation: scrollInfinite 60s linear infinite;
       }
 
       @keyframes scrollInfinite {
         0% { transform: translateY(0); }
-        100% { transform: translateY(-100%); }
+        100% { transform: translateY(-200%); }
       }
 
       .scroll-content div {
         font-size: 5vw;
         justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .scroll-content div {
+        font-size: 6vw;
       }
     }
   </style>
@@ -219,8 +221,7 @@
       const container = document.getElementById(id);
       if (!container) return;
 
-      // дублюємо для безшовного скролу
-      const fullList = [...items, ...items];
+      const fullList = [...items, ...items, ...items]; // ТРИЧІ для безшовного скролу
       for (const [flagUrl, text] of fullList) {
         const div = document.createElement("div");
         const img = document.createElement("img");
