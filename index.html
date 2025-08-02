@@ -10,7 +10,7 @@
       padding: 0;
       background-color: #000;
       color: #fff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -74,18 +74,23 @@
     }
 
     .column {
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .scroll-content {
       display: flex;
       flex-direction: column;
-      overflow: hidden;
-      height: 100%;
       gap: 15px;
     }
 
-    .column.left, .column.right {
+    .left .scroll-content,
+    .right .scroll-content {
       animation: scrollDown 20s linear infinite;
     }
 
-    .column.center {
+    .center .scroll-content {
       animation: scrollUp 20s linear infinite;
     }
 
@@ -99,7 +104,7 @@
       100% { transform: translateY(50%); }
     }
 
-    .column div {
+    .scroll-content div {
       padding: 5px;
       white-space: nowrap;
     }
@@ -125,9 +130,9 @@
   <div id="typewriter" class="typewriter fade-out">I love you ❤️</div>
   <div id="translations" class="translations">
     <div class="grid">
-      <div class="column left" id="left"></div>
-      <div class="column center" id="center"></div>
-      <div class="column right" id="right"></div>
+      <div class="column left"><div class="scroll-content" id="left"></div></div>
+      <div class="column center"><div class="scroll-content" id="center"></div></div>
+      <div class="column right"><div class="scroll-content" id="right"></div></div>
     </div>
   </div>
   <script>
@@ -165,7 +170,7 @@
       ["🇿🇼", "Ndinokuda"],
       ["🇲🇾", "Saya cinta padamu"],
       ["🇱🇺", "Ech hunn dech gaer"],
-      ["🏴", "Mi amas vin"],
+      ["🏳️", "Mi amas vin"],
       ["🇦🇱", "Te dua"],
       ["🇧🇦", "Volim te"],
       ["🇸🇰", "Milujem ťa"],
@@ -179,21 +184,26 @@
       ["🇧🇷", "Eu te amo"]
     ];
 
+    function fillColumn(elementId) {
+      const container = document.getElementById(elementId);
+      const mod = elementId === "left" ? 0 : elementId === "center" ? 1 : 2;
+      const fullList = phrases.filter((_, i) => i % 3 === mod);
+      const doubledList = fullList.concat(fullList); // double for seamless scroll
+
+      doubledList.forEach(([flag, text]) => {
+        const div = document.createElement('div');
+        div.textContent = `${flag} ${text}`;
+        container.appendChild(div);
+      });
+    }
+
     setTimeout(() => {
       document.getElementById('typewriter').style.display = 'none';
       document.getElementById('translations').style.display = 'block';
 
-      const left = document.getElementById('left');
-      const center = document.getElementById('center');
-      const right = document.getElementById('right');
-
-      phrases.forEach((phrase, index) => {
-        const div = document.createElement('div');
-        div.textContent = `${phrase[0]} ${phrase[1]}`;
-        if (index % 3 === 0) left.appendChild(div);
-        else if (index % 3 === 1) center.appendChild(div);
-        else right.appendChild(div);
-      });
+      fillColumn("left");
+      fillColumn("center");
+      fillColumn("right");
     }, 6000);
   </script>
 </body>
