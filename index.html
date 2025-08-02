@@ -69,11 +69,39 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
       font-size: 2vw;
-      text-align: left;
+      height: 60vh;
+      overflow: hidden;
     }
 
-    .grid div {
-      padding: 10px;
+    .column {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      height: 100%;
+      gap: 10px;
+    }
+
+    .column.left, .column.right {
+      animation: scrollDown 20s linear infinite;
+    }
+
+    .column.center {
+      animation: scrollUp 20s linear infinite;
+    }
+
+    @keyframes scrollDown {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+
+    @keyframes scrollUp {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(50%); }
+    }
+
+    .column div {
+      padding: 5px;
+      white-space: nowrap;
     }
 
     @media (max-width: 768px) {
@@ -94,73 +122,75 @@
 <body>
   <div id="typewriter" class="typewriter fade-out">I love you ❤️</div>
   <div id="translations" class="translations">
-    <div class="grid" id="grid"></div>
+    <div class="grid">
+      <div class="column left" id="left"></div>
+      <div class="column center" id="center"></div>
+      <div class="column right" id="right"></div>
+    </div>
   </div>
-
   <script>
     const phrases = [
-      "I love you ❤️ (English)",
-      "Я тебе люблю ❤️ (Ukrainian)",
-      "Je t’aime ❤️ (French)",
-      "Te amo ❤️ (Spanish)",
-      "Ich liebe dich ❤️ (German)",
-      "Ti amo ❤️ (Italian)",
-      "Eu te amo ❤️ (Portuguese)",
-      "Я тебя люблю ❤️ (Russian)",
-      "我爱你 ❤️ (Chinese)",
-      "愛してる ❤️ (Japanese)",
-      "사랑해 ❤️ (Korean)",
-      "أحبك ❤️ (Arabic)",
-      "मैं तुमसे प्यार करता हूँ ❤️ (Hindi)",
-      "Seni seviyorum ❤️ (Turkish)",
-      "دوستت دارم ❤️ (Persian)",
-      "Σ' αγαπώ ❤️ (Greek)",
-      "Kocham cię ❤️ (Polish)",
-      "Miluji tě ❤️ (Czech)",
-      "Te iubesc ❤️ (Romanian)",
-      "Szeretlek ❤️ (Hungarian)",
-      "Ik hou van jou ❤️ (Dutch)",
-      "Jag älskar dig ❤️ (Swedish)",
-      "Jeg elsker deg ❤️ (Norwegian)",
-      "Rakastan sinua ❤️ (Finnish)",
-      "Aku cinta kamu ❤️ (Indonesian)",
-      "Anh yêu em ❤️ (Vietnamese)",
-      "ฉันรักคุณ ❤️ (Thai)",
-      "אני אוהב אותך ❤️ (Hebrew)",
-      "Nakupenda ❤️ (Swahili)",
-      "Mo ni fẹ́ rẹ ❤️ (Yoruba)",
-      "Ke a go rata ❤️ (Tswana)",
-      "Ek het jou lief ❤️ (Afrikaans)",
-      "Volim te ❤️ (Serbian)",
-      "Ljublim te ❤️ (Slovenian)",
-      "Milujem ťa ❤️ (Slovak)",
-      "T'estimo ❤️ (Catalan)",
-      "Jag älskar dig ❤️ (Icelandic)",
-      "Aš tave myliu ❤️ (Lithuanian)",
-      "Es tevi mīlu ❤️ (Latvian)",
-      "Mahal kita ❤️ (Tagalog)",
-      "Ngiyakuthanda ❤️ (Zulu)",
-      "Ndinokuda ❤️ (Shona)",
-      "Tôi yêu bạn ❤️ (Vietnamese)",
-      "Saya cinta padamu ❤️ (Malay)",
-      "Ich liebe dich ❤️ (Luxembourgish)",
-      "Te quiero ❤️ (Galician)",
-      "Mi amas vin ❤️ (Esperanto)",
-      "Volim te ❤️ (Bosnian)",
-      "Te dua ❤️ (Albanian)",
-      "Minä rakastan sinua ❤️ (Karelian)"
+      ["🇺🇸", "I love you (English)"],
+      ["🇫🇷", "Je t’aime (French)"],
+      ["🇪🇸", "Te amo (Spanish)"],
+      ["🇩🇪", "Ich liebe dich (German)"],
+      ["🇮🇹", "Ti amo (Italian)"],
+      ["🇵🇹", "Eu te amo (Portuguese)"],
+      ["🇺🇦", "Я тебе люблю (Ukrainian)"],
+      ["🇨🇳", "我爱你 (Chinese)"],
+      ["🇯🇵", "愛してる (Japanese)"],
+      ["🇰🇷", "사랑해 (Korean)"],
+      ["🇸🇦", "أحبك (Arabic)"],
+      ["🇮🇳", "मैं तुमसे प्यार करता हूँ (Hindi)"],
+      ["🇹🇷", "Seni seviyorum (Turkish)"],
+      ["🇮🇷", "دوستت دارم (Persian)"],
+      ["🇬🇷", "Σ' αγαπώ (Greek)"],
+      ["🇵🇱", "Kocham cię (Polish)"],
+      ["🇨🇿", "Miluji tě (Czech)"],
+      ["🇷🇴", "Te iubesc (Romanian)"],
+      ["🇭🇺", "Szeretlek (Hungarian)"],
+      ["🇳🇱", "Ik hou van jou (Dutch)"],
+      ["🇸🇪", "Jag älskar dig (Swedish)"],
+      ["🇳🇴", "Jeg elsker deg (Norwegian)"],
+      ["🇫🇮", "Rakastan sinua (Finnish)"],
+      ["🇮🇩", "Aku cinta kamu (Indonesian)"],
+      ["🇻🇳", "Tôi yêu bạn (Vietnamese)"],
+      ["🇹🇭", "ฉันรักคุณ (Thai)"],
+      ["🇮🇱", "אני אוהב אותך (Hebrew)"],
+      ["🇰🇪", "Nakupenda (Swahili)"],
+      ["🇳🇬", "Mo ni fẹ́ rẹ (Yoruba)"],
+      ["🇿🇦", "Ngiyakuthanda (Zulu)"],
+      ["🇿🇼", "Ndinokuda (Shona)"],
+      ["🇲🇾", "Saya cinta padamu (Malay)"],
+      ["🇱🇺", "Ech hunn dech gaer (Luxembourgish)"],
+      ["🏴", "Mi amas vin (Esperanto)"],
+      ["🇦🇱", "Te dua (Albanian)"],
+      ["🇧🇦", "Volim te (Bosnian)"],
+      ["🇸🇰", "Milujem ťa (Slovak)"],
+      ["🇸🇮", "Ljubim te (Slovenian)"],
+      ["🇱🇹", "Aš tave myliu (Lithuanian)"],
+      ["🇱🇻", "Es tevi mīlu (Latvian)"],
+      ["🇵🇭", "Mahal kita (Tagalog)"],
+      ["🇮🇸", "Ég elska þig (Icelandic)"],
+      ["🇨🇦", "I love you (Canadian English)"],
+      ["🇲🇽", "Te quiero (Mexican Spanish)"],
+      ["🇧🇷", "Eu te amo (Brazilian Portuguese)"]
     ];
 
     setTimeout(() => {
       document.getElementById('typewriter').style.display = 'none';
-      const translations = document.getElementById('translations');
-      const grid = document.getElementById('grid');
-      translations.style.display = 'block';
+      document.getElementById('translations').style.display = 'block';
 
-      phrases.forEach(phrase => {
+      const left = document.getElementById('left');
+      const center = document.getElementById('center');
+      const right = document.getElementById('right');
+
+      phrases.forEach((phrase, index) => {
         const div = document.createElement('div');
-        div.textContent = phrase;
-        grid.appendChild(div);
+        div.textContent = `${phrase[0]} ${phrase[1]}`;
+        if (index % 3 === 0) left.appendChild(div);
+        else if (index % 3 === 1) center.appendChild(div);
+        else right.appendChild(div);
       });
     }, 6000);
   </script>
