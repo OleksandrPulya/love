@@ -1,135 +1,229 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Scrolling Columns</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I love you</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
-      background: #000;
-      color: white;
-      font-family: sans-serif;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
       overflow: hidden;
     }
 
-    .container {
+    #typewriter {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 10vw;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 0.15em solid #fff;
+      width: 0ch;
+      animation: typing 4s steps(12, end) forwards, blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0ch; }
+      to { width: 12ch; }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: white; }
+    }
+
+    .fade-out {
+      animation: fadeOut 2s ease forwards;
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.95);
+      }
+    }
+
+    .translations {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 960px;
       display: flex;
+      justify-content: center;
+      gap: 40px;
+      opacity: 0;
+      visibility: hidden;
       height: 100vh;
     }
 
     .column {
       flex: 1;
-      display: flex;
-      flex-direction: column;
       overflow: hidden;
-      position: relative;
-      padding: 20px;
-    }
-
-    .column.left .scroll-content {
-      animation: scrollUp 20s linear infinite;
-    }
-
-    .column.right .scroll-content {
-      animation: scrollDown 20s linear infinite;
-    }
-
-    .column.center {
-      flex-direction: column-reverse;
-    }
-
-    .column.center .scroll-content {
-      animation: scrollDown 20s linear infinite;
     }
 
     .scroll-content {
       display: flex;
       flex-direction: column;
+      animation: scroll 20s linear infinite;
     }
 
-    .item {
-      margin: 10px 0;
-      font-size: 1.5rem;
-      text-align: center;
-      white-space: nowrap;
+    .column.center .scroll-content {
+      animation-direction: reverse;
     }
 
-    @keyframes scrollUp {
-      0% {
-        transform: translateY(0%);
-      }
-      100% {
-        transform: translateY(-50%);
+    @keyframes scroll {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+
+    .scroll-content div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px;
+      font-size: 2vw;
+      line-height: 1.3;
+    }
+
+    .scroll-content img {
+      width: 24px;
+      height: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .scroll-content div {
+        font-size: 3vw;
       }
     }
 
-    @keyframes scrollDown {
-      0% {
-        transform: translateY(0%);
+    @media (max-width: 480px) {
+      .translations {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
       }
-      100% {
-        transform: translateY(-50%);
+      .column {
+        width: 100%;
+      }
+      .scroll-content div {
+        font-size: 4vw;
       }
     }
   </style>
 </head>
 <body>
+  <div id="typewriter">I love you ❤️</div>
 
-  <div class="container">
-    <div class="column left" id="left">
-      <div class="scroll-content"></div>
-    </div>
-    <div class="column center" id="center">
-      <div class="scroll-content"></div>
-    </div>
-    <div class="column right" id="right">
-      <div class="scroll-content"></div>
-    </div>
+  <div id="translations" class="translations">
+    <div class="column left"><div class="scroll-content" id="left"></div></div>
+    <div class="column center"><div class="scroll-content" id="center"></div></div>
+    <div class="column right"><div class="scroll-content" id="right"></div></div>
   </div>
 
   <script>
     const phrases = [
-      "Світло завжди знайде шлях.",
-      "Сила в єдності.",
-      "Тільки вперед.",
-      "Разом – ми сила.",
-      "Кожен день – нова можливість.",
-      "Віра рухає гори.",
-      "Не зупиняйся.",
-      "Ми – незламні.",
-      "Слава Україні!",
-      "Героям слава!"
+      ["https://flagcdn.com/us.svg", "I love you"],
+      ["https://flagcdn.com/fr.svg", "Je t’aime"],
+      ["https://flagcdn.com/es.svg", "Te amo"],
+      ["https://flagcdn.com/de.svg", "Ich liebe dich"],
+      ["https://flagcdn.com/it.svg", "Ti amo"],
+      ["https://flagcdn.com/pt.svg", "Eu te amo"],
+      ["https://flagcdn.com/ua.svg", "Я тебе люблю"],
+      ["https://flagcdn.com/cn.svg", "我爱你"],
+      ["https://flagcdn.com/jp.svg", "愛してる"],
+      ["https://flagcdn.com/kr.svg", "사랑해"],
+      ["https://flagcdn.com/sa.svg", "أحبك"],
+      ["https://flagcdn.com/in.svg", "मैं तुमसे प्यार करता हूँ"],
+      ["https://flagcdn.com/tr.svg", "Seni seviyorum"],
+      ["https://flagcdn.com/ir.svg", "دوستت دارم"],
+      ["https://flagcdn.com/gr.svg", "Σ' αγαπώ"],
+      ["https://flagcdn.com/pl.svg", "Kocham cię"],
+      ["https://flagcdn.com/cz.svg", "Miluji tě"],
+      ["https://flagcdn.com/ro.svg", "Te iubesc"],
+      ["https://flagcdn.com/hu.svg", "Szeretlek"],
+      ["https://flagcdn.com/nl.svg", "Ik hou van jou"],
+      ["https://flagcdn.com/se.svg", "Jag älskar dig"],
+      ["https://flagcdn.com/no.svg", "Jeg elsker deg"],
+      ["https://flagcdn.com/fi.svg", "Rakastan sinua"],
+      ["https://flagcdn.com/id.svg", "Aku cinta kamu"],
+      ["https://flagcdn.com/vn.svg", "Tôi yêu bạn"],
+      ["https://flagcdn.com/th.svg", "ฉันรักคุณ"],
+      ["https://flagcdn.com/il.svg", "אני אוהב אותך"],
+      ["https://flagcdn.com/ke.svg", "Nakupenda"],
+      ["https://flagcdn.com/ng.svg", "Mo ni fẹ́ rẹ"],
+      ["https://flagcdn.com/za.svg", "Ngiyakuthanda"],
+      ["https://flagcdn.com/zw.svg", "Ndinokuda"],
+      ["https://flagcdn.com/my.svg", "Saya cinta padamu"],
+      ["https://flagcdn.com/lu.svg", "Ech hunn dech gaer"],
+      ["https://flagcdn.com/aq.svg", "Mi amas vin"],
+      ["https://flagcdn.com/al.svg", "Te dua"],
+      ["https://flagcdn.com/ba.svg", "Volim te"],
+      ["https://flagcdn.com/sk.svg", "Milujem ťa"],
+      ["https://flagcdn.com/si.svg", "Ljubim te"],
+      ["https://flagcdn.com/lt.svg", "Aš tave myliu"],
+      ["https://flagcdn.com/lv.svg", "Es tevi mīlu"],
+      ["https://flagcdn.com/ph.svg", "Mahal kita"],
+      ["https://flagcdn.com/is.svg", "Ég elska þig"],
+      ["https://flagcdn.com/ca.svg", "I love you"],
+      ["https://flagcdn.com/mx.svg", "Te quiero"],
+      ["https://flagcdn.com/br.svg", "Eu te amo"]
     ];
 
+    const columnCount = 3;
+    const perColumn = Math.ceil(phrases.length / columnCount);
     const columns = {
-      left: [],
-      center: [],
-      right: []
+      left: phrases.slice(0, perColumn),
+      center: phrases.slice(perColumn, perColumn * 2),
+      right: phrases.slice(perColumn * 2)
     };
 
-    // Рівномірно розподіляємо фрази по трьох колонках
-    phrases.forEach((phrase, index) => {
-      const column = Object.keys(columns)[index % 3];
-      columns[column].push(phrase);
-    });
-
     function fillColumn(id) {
-      const container = document.querySelector(`#${id} .scroll-content`);
-      const items = [...columns[id], ...columns[id]]; // дублюємо для безперервності
+      const container = document.getElementById(id);
+      if (!container) return;
 
-      items.forEach(text => {
+      const combined = [...columns[id], ...columns[id]];
+      for (const [flagUrl, text] of combined) {
         const div = document.createElement("div");
-        div.className = "item";
-        div.textContent = text;
+        const img = document.createElement("img");
+        img.src = flagUrl;
+        img.alt = "flag";
+        div.appendChild(img);
+        div.appendChild(document.createTextNode(text));
         container.appendChild(div);
-      });
+      }
     }
 
-    fillColumn('left');
-    fillColumn('center');
-    fillColumn('right');
-  </script>
+    setTimeout(() => {
+      const typewriter = document.getElementById("typewriter");
+      typewriter.classList.add("fade-out");
 
+      setTimeout(() => {
+        typewriter.style.display = "none";
+        const translations = document.getElementById("translations");
+        translations.style.visibility = "visible";
+        translations.style.opacity = "1";
+
+        fillColumn("left");
+        fillColumn("center");
+        fillColumn("right");
+      }, 2000);
+    }, 5000); // Дочекатись завершення typing-анімації
+  </script>
 </body>
 </html>
