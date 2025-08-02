@@ -132,17 +132,16 @@
         width: 100%;
         height: 100vh;
       }
-      /* Анімація скролу для однієї колонки */
+      /* Анімація скролу для однієї колонки - безперервний рух вверх */
       .scroll-content {
-        animation: scrollUp 20s linear infinite;
-        /* анімацію напрямку не реверсимо */
+        animation: scrollUp 20s linear infinite !important;
         animation-direction: normal !important;
       }
     }
 
     @keyframes scrollUp {
-      0% { transform: translateY(50%); }
-      100% { transform: translateY(0); }
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
     }
 
     @media (max-width: 480px) {
@@ -222,7 +221,7 @@
       const container = document.getElementById(id);
       if (!container) return;
 
-      // Повторюємо список двічі для безкінечного скролу
+      // Дублюємо список двічі для безперервного скролу
       const combined = [...items, ...items];
       for (const [flagUrl, text] of combined) {
         const div = document.createElement("div");
@@ -245,16 +244,17 @@
         translations.style.visibility = "visible";
         translations.style.opacity = "1";
 
-        // Для комп'ютера три колонки, для мобільного – лише центр із усіма фразами
-        if(window.innerWidth <= 1024) {
+        if (window.innerWidth <= 1024) {
+          // Мобільна/планшетна версія — лише центр із усіма фразами
           fillColumn("center", phrases);
         } else {
+          // Десктоп — три колонки
           fillColumn("left", columns.left);
           fillColumn("center", columns.center);
           fillColumn("right", columns.right);
         }
       }, 2000);
-    }, 5000); // Дочекатись завершення typing-анімації
+    }, 5000); // Чекаємо завершення typing-анімації
   </script>
 </body>
 </html>
