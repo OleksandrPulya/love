@@ -14,7 +14,12 @@
       padding: 0;
       background-color: #000;
       color: #fff;
-      font-family: 'Segoe UI', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+      font-family:
+        'Segoe UI Emoji',
+        'Apple Color Emoji',
+        'Noto Color Emoji',
+        'Segoe UI',
+        sans-serif;
       height: 100vh;
       overflow: hidden;
     }
@@ -226,7 +231,6 @@
       const typewriter = document.getElementById("typewriter");
       typewriter.classList.add("fade-out");
 
-      // Показуємо переклади після зникнення
       setTimeout(() => {
         typewriter.style.display = "none";
         const translations = document.getElementById("translations");
