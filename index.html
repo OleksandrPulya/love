@@ -28,16 +28,16 @@
       white-space: nowrap;
       overflow: hidden;
       border-right: 0.15em solid #fff;
-      width: 0;
+      width: 0ch;
       animation:
-        typing 5s steps(14, end) forwards,
+        typing 5s steps(12, end) forwards,
         blink-caret 0.75s step-end infinite;
       opacity: 1;
     }
 
     @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
+      from { width: 0ch; }
+      to { width: 12ch; }
     }
 
     @keyframes blink-caret {
@@ -47,7 +47,6 @@
 
     .fade-out {
       animation: fadeOut 2s ease forwards;
-      animation-delay: 1s;
     }
 
     @keyframes fadeOut {
@@ -72,15 +71,8 @@
       justify-content: center;
       opacity: 0;
       visibility: hidden;
-      animation: fadeIn 2s ease forwards;
-      animation-delay: 8s;
       width: 960px;
       gap: 40px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); visibility: visible; }
     }
 
     .grid {
