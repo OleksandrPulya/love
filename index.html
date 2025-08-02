@@ -54,8 +54,8 @@
     .translations {
       position: absolute;
       top: 0;
-      left: 0;
-      width: 100%;
+      left: 50%;
+      transform: translateX(-50%);
       height: 100vh;
       display: flex;
       align-items: stretch;
@@ -64,10 +64,11 @@
       opacity: 0;
       animation: fadeIn 2s ease forwards;
       animation-delay: 8s;
-      width: 95%;
-      max-width: 1400px;
-      margin: auto;
+      width: auto;
+      max-width: none;
+      margin: 0;
       box-sizing: border-box;
+      gap: 40px;
     }
 
     @keyframes fadeIn {
@@ -76,18 +77,21 @@
     }
 
     .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      display: flex;
       gap: 40px;
       font-size: 2vw;
-      width: 100%;
+      width: auto;
       height: 100%;
+      justify-content: center;
     }
 
     .column {
       position: relative;
       height: 100%;
       overflow: hidden;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
     }
 
     .scroll-content {
@@ -123,17 +127,23 @@
 
     @media (max-width: 768px) {
       .grid {
-        grid-template-columns: repeat(2, 1fr);
+        flex-wrap: wrap;
         font-size: 3vw;
         gap: 30px;
+      }
+      .column {
+        width: 45%;
       }
     }
 
     @media (max-width: 480px) {
       .grid {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         font-size: 4vw;
         gap: 20px;
+      }
+      .column {
+        width: 100%;
       }
     }
   </style>
@@ -216,7 +226,7 @@
       const typewriter = document.getElementById('typewriter');
       const translations = document.getElementById('translations');
 
-      // Ховаємо напис з ефектом плавного зникання
+      // Плавно ховаємо напис
       typewriter.style.opacity = '0';
       typewriter.style.visibility = 'hidden';
 
