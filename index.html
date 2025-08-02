@@ -10,7 +10,7 @@
       padding: 0;
       background-color: #000;
       color: #fff;
-      font-family: 'Segoe UI', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       height: 100vh;
       overflow: hidden;
     }
@@ -53,10 +53,7 @@
 
     .translations {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: 0; bottom: 0; left: 0; right: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -77,7 +74,7 @@
       font-size: 2vw;
       max-width: 960px;
       width: 100%;
-      height: 80vh;
+      height: 100vh;
       justify-content: center;
     }
 
@@ -97,10 +94,7 @@
       animation-iteration-count: infinite;
     }
 
-    .left .scroll-content {
-      animation-name: scrollDown;
-    }
-
+    .left .scroll-content,
     .right .scroll-content {
       animation-name: scrollDown;
     }
@@ -121,8 +115,16 @@
 
     .scroll-content div {
       white-space: nowrap;
-      font-size: 1.5rem;
-      font-family: 'Segoe UI Emoji', 'Segoe UI', 'Noto Color Emoji', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .scroll-content img {
+      width: 30px;
+      height: 20px;
+      object-fit: cover;
+      border-radius: 2px;
     }
 
     @media (max-width: 768px) {
@@ -130,9 +132,6 @@
         flex-direction: column;
         height: auto;
         font-size: 4vw;
-      }
-      .scroll-content div {
-        font-size: 3vw;
       }
     }
   </style>
@@ -149,60 +148,72 @@
 
   <script>
     const phrases = [
-      ["🇺🇸", "I love you"],
-      ["🇫🇷", "Je t’aime"],
-      ["🇪🇸", "Te amo"],
-      ["🇩🇪", "Ich liebe dich"],
-      ["🇮🇹", "Ti amo"],
-      ["🇵🇹", "Eu te amo"],
-      ["🇺🇦", "Я тебе люблю"],
-      ["🇨🇳", "我爱你"],
-      ["🇯🇵", "愛してる"],
-      ["🇰🇷", "사랑해"],
-      ["🇸🇦", "أحبك"],
-      ["🇮🇳", "मैं तुमसे प्यार करता हूँ"],
-      ["🇹🇷", "Seni seviyorum"],
-      ["🇮🇷", "دوستت دارم"],
-      ["🇬🇷", "Σ' αγαπώ"],
-      ["🇵🇱", "Kocham cię"],
-      ["🇨🇿", "Miluji tě"],
-      ["🇷🇴", "Te iubesc"],
-      ["🇭🇺", "Szeretlek"],
-      ["🇳🇱", "Ik hou van jou"],
-      ["🇸🇪", "Jag älskar dig"],
-      ["🇳🇴", "Jeg elsker deg"],
-      ["🇫🇮", "Rakastan sinua"],
-      ["🇮🇩", "Aku cinta kamu"],
-      ["🇻🇳", "Tôi yêu bạn"],
-      ["🇹🇭", "ฉันรักคุณ"],
-      ["🇮🇱", "אני אוהב אותך"],
-      ["🇰🇪", "Nakupenda"],
-      ["🇳🇬", "Mo ni fẹ́ rẹ"],
-      ["🇿🇦", "Ngiyakuthanda"],
-      ["🇿🇼", "Ndinokuda"],
-      ["🇲🇾", "Saya cinta padamu"],
-      ["🇱🇺", "Ech hunn dech gaer"],
-      ["🏳️", "Mi amas vin"],
-      ["🇦🇱", "Te dua"],
-      ["🇧🇦", "Volim te"],
-      ["🇸🇰", "Milujem ťa"],
-      ["🇸🇮", "Ljubim te"],
-      ["🇱🇹", "Aš tave myliu"],
-      ["🇱🇻", "Es tevi mīlu"],
-      ["🇵🇭", "Mahal kita"],
-      ["🇮🇸", "Ég elska þig"],
-      ["🇨🇦", "I love you"],
-      ["🇲🇽", "Te quiero"],
-      ["🇧🇷", "Eu te amo"]
+      ["us", "I love you"],
+      ["fr", "Je t’aime"],
+      ["es", "Te amo"],
+      ["de", "Ich liebe dich"],
+      ["it", "Ti amo"],
+      ["pt", "Eu te amo"],
+      ["ua", "Я тебе люблю"],
+      ["cn", "我爱你"],
+      ["jp", "愛してる"],
+      ["kr", "사랑해"],
+      ["sa", "أحبك"],
+      ["in", "मैं तुमसे प्यार करता हूँ"],
+      ["tr", "Seni seviyorum"],
+      ["ir", "دوستت دارم"],
+      ["gr", "Σ' αγαπώ"],
+      ["pl", "Kocham cię"],
+      ["cz", "Miluji tě"],
+      ["ro", "Te iubesc"],
+      ["hu", "Szeretlek"],
+      ["nl", "Ik hou van jou"],
+      ["se", "Jag älskar dig"],
+      ["no", "Jeg elsker deg"],
+      ["fi", "Rakastan sinua"],
+      ["id", "Aku cinta kamu"],
+      ["vn", "Tôi yêu bạn"],
+      ["th", "ฉันรักคุณ"],
+      ["il", "אני אוהב אותך"],
+      ["ke", "Nakupenda"],
+      ["ng", "Mo ni fẹ́ rẹ"],
+      ["za", "Ngiyakuthanda"],
+      ["zw", "Ndinokuda"],
+      ["my", "Saya cinta padamu"],
+      ["lu", "Ech hunn dech gaer"],
+      ["x", "Mi amas vin"],
+      ["al", "Te dua"],
+      ["ba", "Volim te"],
+      ["sk", "Milujem ťa"],
+      ["si", "Ljubim te"],
+      ["lt", "Aš tave myliu"],
+      ["lv", "Es tevi mīlu"],
+      ["ph", "Mahal kita"],
+      ["is", "Ég elska þig"],
+      ["ca", "I love you"],
+      ["mx", "Te quiero"],
+      ["br", "Eu te amo"]
     ];
 
-    function fillColumn(id, filterMod) {
+    function getFlagURL(code) {
+      if (code === "x") {
+        return "https://upload.wikimedia.org/wikipedia/commons/7/77/Esperanto_flag_3D.png";
+      }
+      return `https://flagcdn.com/w40/${code}.png`;
+    }
+
+    function fillColumn(id, mod) {
       const container = document.getElementById(id);
-      const filtered = phrases.filter((_, i) => i % 3 === filterMod);
-      const fullList = [...filtered, ...filtered]; // Дублюємо
-      fullList.forEach(([flag, text]) => {
+      const filtered = phrases.filter((_, i) => i % 3 === mod);
+      const fullList = [...filtered, ...filtered];
+
+      fullList.forEach(([code, text]) => {
         const div = document.createElement('div');
-        div.textContent = `${flag} ${text}`;
+        const img = document.createElement('img');
+        img.src = getFlagURL(code);
+        img.alt = code;
+        div.appendChild(img);
+        div.appendChild(document.createTextNode(text));
         container.appendChild(div);
       });
     }
