@@ -54,8 +54,8 @@
     .translations {
       display: none;
       animation: fadeIn 2s ease forwards;
-      width: 90%;
-      max-width: 1200px;
+      width: 95%;
+      max-width: 1400px;
       margin-top: 20px;
     }
 
@@ -66,8 +66,8 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
       font-size: 2vw;
       height: 60vh;
       overflow: hidden;
@@ -78,7 +78,7 @@
       flex-direction: column;
       overflow: hidden;
       height: 100%;
-      gap: 10px;
+      gap: 15px;
     }
 
     .column.left, .column.right {
@@ -108,6 +108,7 @@
       .grid {
         grid-template-columns: repeat(2, 1fr);
         font-size: 3vw;
+        gap: 30px;
       }
     }
 
@@ -115,6 +116,7 @@
       .grid {
         grid-template-columns: 1fr;
         font-size: 4vw;
+        gap: 20px;
       }
     }
   </style>
@@ -130,51 +132,51 @@
   </div>
   <script>
     const phrases = [
-      ["🇺🇸", "I love you (English)"],
-      ["🇫🇷", "Je t’aime (French)"],
-      ["🇪🇸", "Te amo (Spanish)"],
-      ["🇩🇪", "Ich liebe dich (German)"],
-      ["🇮🇹", "Ti amo (Italian)"],
-      ["🇵🇹", "Eu te amo (Portuguese)"],
-      ["🇺🇦", "Я тебе люблю (Ukrainian)"],
-      ["🇨🇳", "我爱你 (Chinese)"],
-      ["🇯🇵", "愛してる (Japanese)"],
-      ["🇰🇷", "사랑해 (Korean)"],
-      ["🇸🇦", "أحبك (Arabic)"],
-      ["🇮🇳", "मैं तुमसे प्यार करता हूँ (Hindi)"],
-      ["🇹🇷", "Seni seviyorum (Turkish)"],
-      ["🇮🇷", "دوستت دارم (Persian)"],
-      ["🇬🇷", "Σ' αγαπώ (Greek)"],
-      ["🇵🇱", "Kocham cię (Polish)"],
-      ["🇨🇿", "Miluji tě (Czech)"],
-      ["🇷🇴", "Te iubesc (Romanian)"],
-      ["🇭🇺", "Szeretlek (Hungarian)"],
-      ["🇳🇱", "Ik hou van jou (Dutch)"],
-      ["🇸🇪", "Jag älskar dig (Swedish)"],
-      ["🇳🇴", "Jeg elsker deg (Norwegian)"],
-      ["🇫🇮", "Rakastan sinua (Finnish)"],
-      ["🇮🇩", "Aku cinta kamu (Indonesian)"],
-      ["🇻🇳", "Tôi yêu bạn (Vietnamese)"],
-      ["🇹🇭", "ฉันรักคุณ (Thai)"],
-      ["🇮🇱", "אני אוהב אותך (Hebrew)"],
-      ["🇰🇪", "Nakupenda (Swahili)"],
-      ["🇳🇬", "Mo ni fẹ́ rẹ (Yoruba)"],
-      ["🇿🇦", "Ngiyakuthanda (Zulu)"],
-      ["🇿🇼", "Ndinokuda (Shona)"],
-      ["🇲🇾", "Saya cinta padamu (Malay)"],
-      ["🇱🇺", "Ech hunn dech gaer (Luxembourgish)"],
-      ["🏴", "Mi amas vin (Esperanto)"],
-      ["🇦🇱", "Te dua (Albanian)"],
-      ["🇧🇦", "Volim te (Bosnian)"],
-      ["🇸🇰", "Milujem ťa (Slovak)"],
-      ["🇸🇮", "Ljubim te (Slovenian)"],
-      ["🇱🇹", "Aš tave myliu (Lithuanian)"],
-      ["🇱🇻", "Es tevi mīlu (Latvian)"],
-      ["🇵🇭", "Mahal kita (Tagalog)"],
-      ["🇮🇸", "Ég elska þig (Icelandic)"],
-      ["🇨🇦", "I love you (Canadian English)"],
-      ["🇲🇽", "Te quiero (Mexican Spanish)"],
-      ["🇧🇷", "Eu te amo (Brazilian Portuguese)"]
+      ["🇺🇸", "I love you"],
+      ["🇫🇷", "Je t’aime"],
+      ["🇪🇸", "Te amo"],
+      ["🇩🇪", "Ich liebe dich"],
+      ["🇮🇹", "Ti amo"],
+      ["🇵🇹", "Eu te amo"],
+      ["🇺🇦", "Я тебе люблю"],
+      ["🇨🇳", "我爱你"],
+      ["🇯🇵", "愛してる"],
+      ["🇰🇷", "사랑해"],
+      ["🇸🇦", "أحبك"],
+      ["🇮🇳", "मैं तुमसे प्यार करता हूँ"],
+      ["🇹🇷", "Seni seviyorum"],
+      ["🇮🇷", "دوستت دارم"],
+      ["🇬🇷", "Σ' αγαπώ"],
+      ["🇵🇱", "Kocham cię"],
+      ["🇨🇿", "Miluji tě"],
+      ["🇷🇴", "Te iubesc"],
+      ["🇭🇺", "Szeretlek"],
+      ["🇳🇱", "Ik hou van jou"],
+      ["🇸🇪", "Jag älskar dig"],
+      ["🇳🇴", "Jeg elsker deg"],
+      ["🇫🇮", "Rakastan sinua"],
+      ["🇮🇩", "Aku cinta kamu"],
+      ["🇻🇳", "Tôi yêu bạn"],
+      ["🇹🇭", "ฉันรักคุณ"],
+      ["🇮🇱", "אני אוהב אותך"],
+      ["🇰🇪", "Nakupenda"],
+      ["🇳🇬", "Mo ni fẹ́ rẹ"],
+      ["🇿🇦", "Ngiyakuthanda"],
+      ["🇿🇼", "Ndinokuda"],
+      ["🇲🇾", "Saya cinta padamu"],
+      ["🇱🇺", "Ech hunn dech gaer"],
+      ["🏴", "Mi amas vin"],
+      ["🇦🇱", "Te dua"],
+      ["🇧🇦", "Volim te"],
+      ["🇸🇰", "Milujem ťa"],
+      ["🇸🇮", "Ljubim te"],
+      ["🇱🇹", "Aš tave myliu"],
+      ["🇱🇻", "Es tevi mīlu"],
+      ["🇵🇭", "Mahal kita"],
+      ["🇮🇸", "Ég elska þig"],
+      ["🇨🇦", "I love you"],
+      ["🇲🇽", "Te quiero"],
+      ["🇧🇷", "Eu te amo"]
     ];
 
     setTimeout(() => {
