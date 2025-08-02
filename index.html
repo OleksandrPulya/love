@@ -218,15 +218,25 @@
       ["https://flagcdn.com/br.svg", "Eu te amo"]
     ];
 
+    // Рівномірний розподіл по колонках
+    const columns = {
+      left: [],
+      center: [],
+      right: []
+    };
+
+    phrases.forEach((item, index) => {
+      const col = index % 3 === 0 ? 'left' : index % 3 === 1 ? 'center' : 'right';
+      columns[col].push(item);
+    });
+
     function fillColumn(id) {
       const container = document.getElementById(id);
       if (!container || container.children.length > 0) return;
 
-      const mod = id === "left" ? 0 : id === "center" ? 1 : 2;
-      const filtered = phrases.filter((_, i) => i % 3 === mod);
-      const doubled = filtered.concat(filtered);
+      const items = [...columns[id], ...columns[id]]; // дублюємо для плавної прокрутки
 
-      for (const [flagUrl, text] of doubled) {
+      for (const [flagUrl, text] of items) {
         const div = document.createElement("div");
         const img = document.createElement("img");
         img.src = flagUrl;
