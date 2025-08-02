@@ -8,18 +8,36 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #000; /* чорний фон */
-      color: #fff; /* білий текст */
+      background-color: #000;
+      color: #fff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      font-size: 3em;
+      overflow: hidden;
+    }
+
+    .typewriter {
+      font-size: 10vw; /* адаптивний розмір тексту */
+      white-space: nowrap;
+      border-right: 0.15em solid #fff;
+      overflow: hidden;
+      animation: typing 3s steps(10, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: white }
     }
   </style>
 </head>
 <body>
-  I love you
+  <div class="typewriter">I love you</div>
 </body>
 </html>
