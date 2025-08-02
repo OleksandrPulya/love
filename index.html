@@ -26,29 +26,39 @@
       transform: translate(-50%, -50%);
       font-size: 10vw;
       white-space: nowrap;
-      border-right: 0.15em solid #fff;
       overflow: hidden;
+      border-right: 0.15em solid #fff;
       width: 0;
-      animation: typing 5s steps(14, end) forwards, blink-caret 0.75s step-end infinite;
+      animation:
+        typing 5s steps(14, end) forwards,
+        blink-caret 0.75s step-end infinite;
+      opacity: 1;
     }
 
     @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+      from { width: 0; }
+      to { width: 100%; }
     }
 
     @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: white }
+      from, to { border-color: transparent; }
+      50% { border-color: white; }
     }
 
     .fade-out {
       animation: fadeOut 2s ease forwards;
+      animation-delay: 1s;
     }
 
     @keyframes fadeOut {
-      from { opacity: 1; transform: scale(1); }
-      to { opacity: 0; transform: scale(0.95); }
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.95);
+      }
     }
 
     .translations {
@@ -146,6 +156,7 @@
 </head>
 <body>
   <div id="typewriter">I love you ❤️</div>
+
   <div id="translations" class="translations">
     <div class="grid">
       <div class="column left"><div class="scroll-content" id="left"></div></div>
@@ -203,39 +214,38 @@
       ["🇧🇷", "Eu te amo"]
     ];
 
-    function fillColumn(elementId) {
-      const container = document.getElementById(elementId);
+    function fillColumn(id) {
+      const container = document.getElementById(id);
+      if (!container) return;
       if (container.children.length > 0) return;
 
-      const mod = elementId === "left" ? 0 : elementId === "center" ? 1 : 2;
-      const fullList = phrases.filter((_, i) => i % 3 === mod);
-      const doubledList = fullList.concat(fullList);
+      const mod = id === "left" ? 0 : id === "center" ? 1 : 2;
+      const filtered = phrases.filter((_, i) => i % 3 === mod);
+      const doubled = filtered.concat(filtered);
 
-      doubledList.forEach(([flag, text]) => {
-        const div = document.createElement('div');
+      for (const [flag, text] of doubled) {
+        const div = document.createElement("div");
         div.textContent = `${flag} ${text}`;
         container.appendChild(div);
-      });
+      }
     }
 
     setTimeout(() => {
-      const typewriter = document.getElementById('typewriter');
-      const translations = document.getElementById('translations');
+      const typewriter = document.getElementById("typewriter");
+      typewriter.classList.add("fade-out");
 
-      // Додаємо клас для плавного зникнення
-      typewriter.classList.add('fade-out');
-
-      // Через 2 секунди показуємо переклади
+      // Показуємо переклади після зникнення
       setTimeout(() => {
-        typewriter.style.display = 'none';
-        translations.style.visibility = 'visible';
-        translations.style.opacity = '1';
+        typewriter.style.display = "none";
+        const translations = document.getElementById("translations");
+        translations.style.visibility = "visible";
+        translations.style.opacity = "1";
 
         fillColumn("left");
         fillColumn("center");
         fillColumn("right");
-      }, 2000);
-    }, 6000);
+      }, 2000); // чекати завершення fadeOut
+    }, 6000); // після typing
   </script>
 </body>
 </html>
