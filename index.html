@@ -59,16 +59,6 @@
       50% { border-color: white; }
     }
 
-    .fade-out {
-      opacity: 0 !important;
-      transition: opacity 2s ease;
-    }
-
-    .fade-in {
-      opacity: 1 !important;
-      transition: opacity 2s ease;
-    }
-
     .translations {
       position: absolute;
       top: 0;
@@ -125,7 +115,6 @@
       height: 16px;
     }
 
-    /* --- Мобільна адаптація --- */
     @media (max-width: 768px) {
       .translations {
         flex-direction: column;
@@ -176,20 +165,13 @@
   <script>
     const phrases = [
       ["https://flagcdn.com/us.svg", "I love you"],
+      ["https://flagcdn.com/ua.svg", "Я тебе люблю"],
+      ["https://flagcdn.com/gb.svg", "I love you"],
       ["https://flagcdn.com/fr.svg", "Je t’aime"],
       ["https://flagcdn.com/es.svg", "Te amo"],
       ["https://flagcdn.com/de.svg", "Ich liebe dich"],
       ["https://flagcdn.com/it.svg", "Ti amo"],
       ["https://flagcdn.com/pt.svg", "Eu te amo"],
-      ["https://flagcdn.com/ua.svg", "Я тебе люблю"],
-      ["https://flagcdn.com/cn.svg", "我爱你"],
-      ["https://flagcdn.com/jp.svg", "愛してる"],
-      ["https://flagcdn.com/kr.svg", "사랑해"],
-      ["https://flagcdn.com/sa.svg", "أحبك"],
-      ["https://flagcdn.com/in.svg", "मैं तुमसे प्यार करता हूँ"],
-      ["https://flagcdn.com/tr.svg", "Seni seviyorum"],
-      ["https://flagcdn.com/ir.svg", "دوستت دارم"],
-      ["https://flagcdn.com/gr.svg", "Σ' αγαπώ"],
       ["https://flagcdn.com/pl.svg", "Kocham cię"],
       ["https://flagcdn.com/cz.svg", "Miluji tě"],
       ["https://flagcdn.com/ro.svg", "Te iubesc"],
@@ -198,28 +180,38 @@
       ["https://flagcdn.com/se.svg", "Jag älskar dig"],
       ["https://flagcdn.com/no.svg", "Jeg elsker deg"],
       ["https://flagcdn.com/fi.svg", "Rakastan sinua"],
-      ["https://flagcdn.com/id.svg", "Aku cinta kamu"],
-      ["https://flagcdn.com/vn.svg", "Tôi yêu bạn"],
-      ["https://flagcdn.com/th.svg", "ฉันรักคุณ"],
-      ["https://flagcdn.com/il.svg", "אני אוהב אותך"],
-      ["https://flagcdn.com/ke.svg", "Nakupenda"],
-      ["https://flagcdn.com/ng.svg", "Mo ni fẹ́ rẹ"],
-      ["https://flagcdn.com/za.svg", "Ngiyakuthanda"],
-      ["https://flagcdn.com/zw.svg", "Ndinokuda"],
-      ["https://flagcdn.com/my.svg", "Saya cinta padamu"],
-      ["https://flagcdn.com/lu.svg", "Ech hunn dech gaer"],
-      ["https://flagcdn.com/aq.svg", "Mi amas vin"],
-      ["https://flagcdn.com/al.svg", "Te dua"],
+      ["https://flagcdn.com/lv.svg", "Es tevi mīlu"],
+      ["https://flagcdn.com/lt.svg", "Aš tave myliu"],
+      ["https://flagcdn.com/ee.svg", "Ma armastan sind"],
+      ["https://flagcdn.com/gr.svg", "Σ' αγαπώ"],
+      ["https://flagcdn.com/ru.svg", "Я тебя люблю"],
+      ["https://flagcdn.com/bg.svg", "Обичам те"],
+      ["https://flagcdn.com/al.svg", "Të dua"],
       ["https://flagcdn.com/ba.svg", "Volim te"],
+      ["https://flagcdn.com/hr.svg", "Volim te"],
+      ["https://flagcdn.com/rs.svg", "Volim te"],
+      ["https://flagcdn.com/mk.svg", "Te sakam"],
       ["https://flagcdn.com/sk.svg", "Milujem ťa"],
       ["https://flagcdn.com/si.svg", "Ljubim te"],
-      ["https://flagcdn.com/lt.svg", "Aš tave myliu"],
-      ["https://flagcdn.com/lv.svg", "Es tevi mīlu"],
+      ["https://flagcdn.com/tr.svg", "Seni seviyorum"],
+      ["https://flagcdn.com/ir.svg", "دوستت دارم"],
+      ["https://flagcdn.com/il.svg", "אני אוהב אותך"],
+      ["https://flagcdn.com/in.svg", "मैं तुमसे प्यार करता हूँ"],
+      ["https://flagcdn.com/cn.svg", "我爱你"],
+      ["https://flagcdn.com/jp.svg", "愛してる"],
+      ["https://flagcdn.com/kr.svg", "사랑해"],
+      ["https://flagcdn.com/th.svg", "ฉันรักคุณ"],
+      ["https://flagcdn.com/vn.svg", "Tôi yêu bạn"],
+      ["https://flagcdn.com/id.svg", "Aku cinta kamu"],
       ["https://flagcdn.com/ph.svg", "Mahal kita"],
-      ["https://flagcdn.com/is.svg", "Ég elska þig"],
-      ["https://flagcdn.com/ca.svg", "I love you"],
+      ["https://flagcdn.com/my.svg", "Saya cinta padamu"],
+      ["https://flagcdn.com/za.svg", "Ngiyakuthanda"],
+      ["https://flagcdn.com/ng.svg", "Mo ni fẹ́ rẹ"],
+      ["https://flagcdn.com/ke.svg", "Nakupenda"],
+      ["https://flagcdn.com/zw.svg", "Ndinokuda"],
       ["https://flagcdn.com/mx.svg", "Te quiero"],
-      ["https://flagcdn.com/br.svg", "Eu te amo"]
+      ["https://flagcdn.com/br.svg", "Eu te amo"],
+      ["https://flagcdn.com/ca.svg", "Je t’aime"]
     ];
 
     const columnCount = 3;
@@ -234,9 +226,8 @@
       const container = document.getElementById(id);
       if (!container) return;
 
-      container.innerHTML = ""; // очищаємо перед заповненням
-
-      const fullList = [...items, ...items]; // для безшовного скролу
+      container.innerHTML = "";
+      const fullList = [...items, ...items];
       for (const [flagUrl, text] of fullList) {
         const div = document.createElement("div");
         const img = document.createElement("img");
@@ -256,35 +247,23 @@
       const centerCol = document.querySelector(".column.center");
       const rightCol = document.querySelector(".column.right");
 
-      // Чекаємо поки надрукується (4с) + 1с додатково
       await new Promise(r => setTimeout(r, 5000));
-
-      // Повільно зникає typewriter (2с)
       typewriter.style.opacity = '0';
       await new Promise(r => setTimeout(r, 2000));
       typewriter.style.display = 'none';
 
-      // Показуємо великий текст "різними мовами"
       multilang.style.opacity = '1';
-
-      // Тримаємо 3 секунди
       await new Promise(r => setTimeout(r, 3000));
-
-      // Повільно зникаємо "різними мовами"
       multilang.style.opacity = '0';
       await new Promise(r => setTimeout(r, 2000));
       multilang.style.display = 'none';
 
-      // Перевірка ширини екрану
       if (window.innerWidth <= 768) {
-        // Для мобільних — показуємо лише центр із усіма мовами
         leftCol.style.display = 'none';
         rightCol.style.display = 'none';
         centerCol.style.width = '100%';
-
         fillColumn("center", phrases);
       } else {
-        // Для десктопу — показуємо три колонки з поділом мов
         leftCol.style.display = 'block';
         rightCol.style.display = 'block';
         centerCol.style.width = '33%';
