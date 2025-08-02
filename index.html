@@ -14,12 +14,7 @@
       padding: 0;
       background-color: #000;
       color: #fff;
-      font-family:
-        'Segoe UI Emoji',
-        'Apple Color Emoji',
-        'Noto Color Emoji',
-        'Segoe UI',
-        sans-serif;
+      font-family: 'Segoe UI', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
       height: 100vh;
       overflow: hidden;
     }
@@ -128,6 +123,13 @@
       white-space: nowrap;
     }
 
+    .scroll-content div img {
+      width: 24px;
+      height: 16px;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
     @media (max-width: 768px) {
       .grid {
         flex-wrap: wrap;
@@ -164,51 +166,51 @@
 
   <script>
     const phrases = [
-      ["🇺🇸", "I love you"],
-      ["🇫🇷", "Je t’aime"],
-      ["🇪🇸", "Te amo"],
-      ["🇩🇪", "Ich liebe dich"],
-      ["🇮🇹", "Ti amo"],
-      ["🇵🇹", "Eu te amo"],
-      ["🇺🇦", "Я тебе люблю"],
-      ["🇨🇳", "我爱你"],
-      ["🇯🇵", "愛してる"],
-      ["🇰🇷", "사랑해"],
-      ["🇸🇦", "أحبك"],
-      ["🇮🇳", "मैं तुमसे प्यार करता हूँ"],
-      ["🇹🇷", "Seni seviyorum"],
-      ["🇮🇷", "دوستت دارم"],
-      ["🇬🇷", "Σ' αγαπώ"],
-      ["🇵🇱", "Kocham cię"],
-      ["🇨🇿", "Miluji tě"],
-      ["🇷🇴", "Te iubesc"],
-      ["🇭🇺", "Szeretlek"],
-      ["🇳🇱", "Ik hou van jou"],
-      ["🇸🇪", "Jag älskar dig"],
-      ["🇳🇴", "Jeg elsker deg"],
-      ["🇫🇮", "Rakastan sinua"],
-      ["🇮🇩", "Aku cinta kamu"],
-      ["🇻🇳", "Tôi yêu bạn"],
-      ["🇹🇭", "ฉันรักคุณ"],
-      ["🇮🇱", "אני אוהב אותך"],
-      ["🇰🇪", "Nakupenda"],
-      ["🇳🇬", "Mo ni fẹ́ rẹ"],
-      ["🇿🇦", "Ngiyakuthanda"],
-      ["🇿🇼", "Ndinokuda"],
-      ["🇲🇾", "Saya cinta padamu"],
-      ["🇱🇺", "Ech hunn dech gaer"],
-      ["🏳️", "Mi amas vin"],
-      ["🇦🇱", "Te dua"],
-      ["🇧🇦", "Volim te"],
-      ["🇸🇰", "Milujem ťa"],
-      ["🇸🇮", "Ljubim te"],
-      ["🇱🇹", "Aš tave myliu"],
-      ["🇱🇻", "Es tevi mīlu"],
-      ["🇵🇭", "Mahal kita"],
-      ["🇮🇸", "Ég elska þig"],
-      ["🇨🇦", "I love you"],
-      ["🇲🇽", "Te quiero"],
-      ["🇧🇷", "Eu te amo"]
+      ["https://flagcdn.com/us.svg", "I love you"],
+      ["https://flagcdn.com/fr.svg", "Je t’aime"],
+      ["https://flagcdn.com/es.svg", "Te amo"],
+      ["https://flagcdn.com/de.svg", "Ich liebe dich"],
+      ["https://flagcdn.com/it.svg", "Ti amo"],
+      ["https://flagcdn.com/pt.svg", "Eu te amo"],
+      ["https://flagcdn.com/ua.svg", "Я тебе люблю"],
+      ["https://flagcdn.com/cn.svg", "我爱你"],
+      ["https://flagcdn.com/jp.svg", "愛してる"],
+      ["https://flagcdn.com/kr.svg", "사랑해"],
+      ["https://flagcdn.com/sa.svg", "أحبك"],
+      ["https://flagcdn.com/in.svg", "मैं तुमसे प्यार करता हूँ"],
+      ["https://flagcdn.com/tr.svg", "Seni seviyorum"],
+      ["https://flagcdn.com/ir.svg", "دوستت دارم"],
+      ["https://flagcdn.com/gr.svg", "Σ' αγαπώ"],
+      ["https://flagcdn.com/pl.svg", "Kocham cię"],
+      ["https://flagcdn.com/cz.svg", "Miluji tě"],
+      ["https://flagcdn.com/ro.svg", "Te iubesc"],
+      ["https://flagcdn.com/hu.svg", "Szeretlek"],
+      ["https://flagcdn.com/nl.svg", "Ik hou van jou"],
+      ["https://flagcdn.com/se.svg", "Jag älskar dig"],
+      ["https://flagcdn.com/no.svg", "Jeg elsker deg"],
+      ["https://flagcdn.com/fi.svg", "Rakastan sinua"],
+      ["https://flagcdn.com/id.svg", "Aku cinta kamu"],
+      ["https://flagcdn.com/vn.svg", "Tôi yêu bạn"],
+      ["https://flagcdn.com/th.svg", "ฉันรักคุณ"],
+      ["https://flagcdn.com/il.svg", "אני אוהב אותך"],
+      ["https://flagcdn.com/ke.svg", "Nakupenda"],
+      ["https://flagcdn.com/ng.svg", "Mo ni fẹ́ rẹ"],
+      ["https://flagcdn.com/za.svg", "Ngiyakuthanda"],
+      ["https://flagcdn.com/zw.svg", "Ndinokuda"],
+      ["https://flagcdn.com/my.svg", "Saya cinta padamu"],
+      ["https://flagcdn.com/lu.svg", "Ech hunn dech gaer"],
+      ["https://flagcdn.com/aq.svg", "Mi amas vin"],
+      ["https://flagcdn.com/al.svg", "Te dua"],
+      ["https://flagcdn.com/ba.svg", "Volim te"],
+      ["https://flagcdn.com/sk.svg", "Milujem ťa"],
+      ["https://flagcdn.com/si.svg", "Ljubim te"],
+      ["https://flagcdn.com/lt.svg", "Aš tave myliu"],
+      ["https://flagcdn.com/lv.svg", "Es tevi mīlu"],
+      ["https://flagcdn.com/ph.svg", "Mahal kita"],
+      ["https://flagcdn.com/is.svg", "Ég elska þig"],
+      ["https://flagcdn.com/ca.svg", "I love you"],
+      ["https://flagcdn.com/mx.svg", "Te quiero"],
+      ["https://flagcdn.com/br.svg", "Eu te amo"]
     ];
 
     function fillColumn(id) {
@@ -220,9 +222,15 @@
       const filtered = phrases.filter((_, i) => i % 3 === mod);
       const doubled = filtered.concat(filtered);
 
-      for (const [flag, text] of doubled) {
+      for (const [flagUrl, text] of doubled) {
         const div = document.createElement("div");
-        div.textContent = `${flag} ${text}`;
+
+        const img = document.createElement("img");
+        img.src = flagUrl;
+        img.alt = "flag";
+        div.appendChild(img);
+
+        div.appendChild(document.createTextNode(text));
         container.appendChild(div);
       }
     }
@@ -240,8 +248,8 @@
         fillColumn("left");
         fillColumn("center");
         fillColumn("right");
-      }, 2000); // чекати завершення fadeOut
-    }, 6000); // після typing
+      }, 2000);
+    }, 6000);
   </script>
 </body>
 </html>
